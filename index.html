@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AutoService Manager - Mockup</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>AutoService Manager</h1>
+    <p>Aplicație pentru gestionarea reparațiilor și intervențiilor auto.</p>
+    <p class="app-count">3 intervenții, dintre care 2 active</p>
+  </header>
+  
+  <main class="container">
+    <section class="panel">
+      <h2>Adaugă intervenție</h2>
+      <form class="item-form">
+        <label>Intervenție 
+            <input type="text" name="titlu" placeholder="Ex: Schimb ulei VW Golf" />
+        </label>
+        <label>Tip Service
+          <select name="eticheta">
+            <option value="mechanics">Mecanică</option>
+            <option value="electrical">Electrică</option>
+            <option value="bodywork">Tinichigerie/Caroserie</option>
+          </select>
+        </label>
+        <button type="submit">Adaugă</button>
+      </form>
+    </section>
+    
+    <section class="panel">
+      <h2>Intervențiile mele</h2>
+      <!-- Când lista e goală: <p class="empty">Nu există nicio intervenție.</p> -->
+      <ul class="item-list">
+        <li class="item-card">
+          <div>
+            <h3>Oil change VW Golf</h3>
+            <span class="badge badge-mechanics">Mecanică</span>
+          </div>
+          <span class="status">Activ</span>
+        </li>
+        
+        <li class="item-card done">
+          <div>
+            <h3>Replace battery Ford Focus</h3>
+            <span class="badge badge-electrical">Electrică</span>
+          </div>
+          <span class="status">Gata</span>
+        </li>
+        
+        <li class="item-card">
+          <div>
+            <h3>Paint front bumper BMW</h3>
+            <span class="badge badge-bodywork">Tinichigerie</span>
+          </div>
+          <span class="status">Activ</span>
+        </li>
+      </ul>
+    </section>
+  </main>
+  
+  <footer class="app-footer">Proiect Tehnologii Web</footer>
+</body>
+</html>
