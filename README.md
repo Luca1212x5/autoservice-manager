@@ -34,7 +34,7 @@ Open index.html in a browser. No build step, no server.
 
 | ID | Requirement | Where (permalink) | How to check |
 | --- | --- | --- | --- |
-| S1-R1 | README: description, fields, sample data, how to run | https://github.com/Luca1212x5/autoservice-manager/blob/d4b7740/README.md#L5-L15 | read |
+| S1-R1 | README: description, fields, sample data, how to run | https://github.com/Luca1212x5/autoservice-manager/blob/80220149d8191ade0a2bebdb283b3714f79b4208/README.md | read |
 | S1-R2 | AI usage section | https://github.com/Luca1212x5/autoservice-manager/blob/d4b7740/README.md#L20-L30 | read |
 | S1-R3 | AI log for stage 1 | https://github.com/Luca1212x5/autoservice-manager/blob/d4b7740/ai-log/etapa-01.md | read |
 | S1-R4 | header, form (text + select), 3 cards with own data | https://github.com/Luca1212x5/autoservice-manager/blob/d4b7740/index.html#L10-L54 | open the page |
