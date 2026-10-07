@@ -62,10 +62,10 @@ Plain JavaScript, no DOM. `interventii.js` holds the array and the functions tha
 ### Stage 2 Checklist
 | ID | Requirement | Where (permalink) | How to check |
 | --- | --- | --- | --- |
-| S2-R1 | JS file linked, logs on page load | https://github.com/Luca1212x5/autoservice-manager/blob/LIPEȘTE_HASH_LUNG_AICI/index.html?plain=1#L62-L63 | open page, F12 |
-| S2-R2 | 3+ items with id, name, state, tag | https://github.com/Luca1212x5/autoservice-manager/blob/LIPEȘTE_HASH_LUNG_AICI/interventii.js#L4-L8 | read |
-| S2-R3 | list, count, search, add, toggle, delete | https://github.com/Luca1212x5/autoservice-manager/blob/LIPEȘTE_HASH_LUNG_AICI/interventii.js#L10-L42 | console output |
-| S2-R4 | add rejects empty name and invalid tag | https://github.com/Luca1212x5/autoservice-manager/blob/LIPEȘTE_HASH_LUNG_AICI/interventii.js#L35-L42 | last 2 console lines |
-| S2-R5 | original array unchanged after add | https://github.com/Luca1212x5/autoservice-manager/blob/LIPEȘTE_HASH_LUNG_AICI/interventii.js#L68-L70 | console line |
+| S2-R1 | JS file linked, logs on page load | https://github.com/Luca1212x5/autoservice-manager/blob/8d58d3cbd2833e9ef7c6b2cbea08c59d31bbadf7/index.html?plain=1#L62-L63 | open page, F12 |
+| S2-R2 | 3+ items with id, name, state, tag | https://github.com/Luca1212x5/autoservice-manager/blob/8d58d3cbd2833e9ef7c6b2cbea08c59d31bbadf7/interventii.js#L4-L8 | read |
+| S2-R3 | list, count, search, add, toggle, delete | https://github.com/Luca1212x5/autoservice-manager/blob/8d58d3cbd2833e9ef7c6b2cbea08c59d31bbadf7/interventii.js#L10-L42 | console output |
+| S2-R4 | add rejects empty name and invalid tag | https://github.com/Luca1212x5/autoservice-manager/blob/8d58d3cbd2833e9ef7c6b2cbea08c59d31bbadf7/interventii.js#L35-L42 | last 2 console lines |
+| S2-R5 | original array unchanged after add | https://github.com/Luca1212x5/autoservice-manager/blob/8d58d3cbd2833e9ef7c6b2cbea08c59d31bbadf7/interventii.js#L68-L70 | console line |
 | S2-R6 | README Stage 2 section + AI log | https://github.com/Luca1212x5/autoservice-manager/blob/main/ai-log/etapa-02.md | read |
-| S2-R7 | commit "Stage 2" pushed | https://github.com/Luca1212x5/autoservice-manager/commit/LIPEȘTE_HASH_LUNG_AICI | commit history |
+| S2-R7 | commit "Stage 2" pushed | https://github.com/Luca1212x5/autoservice-manager/commit/8d58d3cbd2833e9ef7c6b2cbea08c59d31bbadf7 | commit history |
