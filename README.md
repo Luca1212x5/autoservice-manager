@@ -104,9 +104,9 @@ The list is rendered from the data, through two components:
 | ID | Requirement | Where (permalink) | How to check |
 | --- | --- | --- | --- |
 | S4-R1 | 2+ components in src/components/ | https://github.com/Luca1212x5/autoservice-manager/tree/9c167bd207a814d9a8d3ced2360723df9f81a95c/frontend/src/components | open folder |
-| S4-R2 | card receives data through props | https://github.com/Luca1212x5/autoservice-manager/blob/9c167bd207a814d9a8d3ced2360723df9f81a95c/frontend/src/components/InterventieCard.jsx#L8 | read |
+| S4-R2 | card receives data through props | https://github.com/Luca1212x5/autoservice-manager/blob/9c167bd207a814d9a8d3ced2360723df9f81a95c/frontend/src/components/InterventieCard.jsx#L10 | read |
 | S4-R3 | map + key={id}, no console warnings | https://github.com/Luca1212x5/autoservice-manager/blob/9c167bd207a814d9a8d3ced2360723df9f81a95c/frontend/src/components/InterventieList.jsx#L12-L14 | F12, Console |
 | S4-R4 | message for empty list | https://github.com/Luca1212x5/autoservice-manager/blob/9c167bd207a814d9a8d3ced2360723df9f81a95c/frontend/src/components/InterventieList.jsx#L5-L7 | set array to [] |
-| S4-R5 | state changes the card look | https://github.com/Luca1212x5/autoservice-manager/blob/9c167bd207a814d9a8d3ced2360723df9f81a95c/frontend/src/components/InterventieCard.jsx#L10 | toggle a done flag |
+| S4-R5 | state changes the card look | https://github.com/Luca1212x5/autoservice-manager/blob/9c167bd207a814d9a8d3ced2360723df9f81a95c/frontend/src/components/InterventieCard.jsx#L12 | toggle a done flag |
 | S4-R6 | README Stage 4 section + AI log | https://github.com/Luca1212x5/autoservice-manager/blob/9c167bd207a814d9a8d3ced2360723df9f81a95c/ai-log/etapa-04.md | read |
 | S4-R7 | commit "Stage 4" pushed | https://github.com/Luca1212x5/autoservice-manager/commit/9c167bd207a814d9a8d3ced2360723df9f81a95c | commit history |
