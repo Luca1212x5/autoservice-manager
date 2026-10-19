@@ -84,13 +84,13 @@ The app now lives in frontend/, built with Vite. The data from stage 2 moved int
 
 | ID | Requirement | Where (permalink) | How to check |
 | --- | --- | --- | --- |
-| S3-R1 | npm run dev starts without errors | https://github.com/Luca1212x5/autoservice-manager/blob/main/frontend/package.json | npm install, npm run dev |
-| S3-R2 | app name and counter computed from data | https://github.com/Luca1212x5/autoservice-manager/blob/main/frontend/src/App.jsx | edit data, save |
-| S3-R3 | data from README, not from the example | https://github.com/Luca1212x5/autoservice-manager/blob/main/frontend/src/App.jsx | compare with README |
-| S3-R4 | stage 1 styles reused | https://github.com/Luca1212x5/autoservice-manager/blob/main/frontend/src/App.css | look at the page |
-| S3-R5 | node_modules ignored, build passes | https://github.com/Luca1212x5/autoservice-manager/blob/main/frontend/.gitignore | npm run build |
-| S3-R6 | README Stage 3 section + AI log | https://github.com/Luca1212x5/autoservice-manager/blob/main/ai-log/etapa-03.md | read |
-| S3-R7 | commit "Stage 3" pushed | https://github.com/Luca1212x5/autoservice-manager/commits/main | commit history |
+| S3-R1 | npm run dev starts without errors | https://github.com/Luca1212x5/autoservice-manager/blob/9c167bd207a814d9a8d3ced2360723df9f81a95c/frontend/package.json#L7 | npm install, npm run dev |
+| S3-R2 | app name and counter computed from data | https://github.com/Luca1212x5/autoservice-manager/blob/9c167bd207a814d9a8d3ced2360723df9f81a95c/frontend/src/App.jsx#L10-L18 | edit data, save |
+| S3-R3 | data from README, not from the example | https://github.com/Luca1212x5/autoservice-manager/blob/9c167bd207a814d9a8d3ced2360723df9f81a95c/frontend/src/App.jsx#L3-L8 | compare with README |
+| S3-R4 | stage 1 styles reused | https://github.com/Luca1212x5/autoservice-manager/blob/9c167bd207a814d9a8d3ced2360723df9f81a95c/frontend/src/App.css#L1-L5 | look at the page |
+| S3-R5 | node_modules ignored, build passes | https://github.com/Luca1212x5/autoservice-manager/blob/9c167bd207a814d9a8d3ced2360723df9f81a95c/frontend/.gitignore#L3 | npm run build |
+| S3-R6 | README Stage 3 section + AI log | https://github.com/Luca1212x5/autoservice-manager/blob/9c167bd207a814d9a8d3ced2360723df9f81a95c/ai-log/etapa-03.md | read |
+| S3-R7 | commit "Stage 3" pushed | https://github.com/Luca1212x5/autoservice-manager/commit/9c167bd207a814d9a8d3ced2360723df9f81a95c | commit history |
 
 ---
 
@@ -103,10 +103,10 @@ The list is rendered from the data, through two components:
 
 | ID | Requirement | Where (permalink) | How to check |
 | --- | --- | --- | --- |
-| S4-R1 | 2+ components in src/components/ | https://github.com/Luca1212x5/autoservice-manager/tree/main/frontend/src/components | open folder |
-| S4-R2 | card receives data through props | https://github.com/Luca1212x5/autoservice-manager/blob/main/frontend/src/components/InterventieCard.jsx | read |
-| S4-R3 | map + key={id}, no console warnings | https://github.com/Luca1212x5/autoservice-manager/blob/main/frontend/src/components/InterventieList.jsx | F12, Console |
-| S4-R4 | message for empty list | https://github.com/Luca1212x5/autoservice-manager/blob/main/frontend/src/components/InterventieList.jsx | set array to [] |
-| S4-R5 | state changes the card look | https://github.com/Luca1212x5/autoservice-manager/blob/main/frontend/src/components/InterventieCard.jsx | toggle a done flag |
-| S4-R6 | README Stage 4 section + AI log | https://github.com/Luca1212x5/autoservice-manager/blob/main/ai-log/etapa-04.md | read |
-| S4-R7 | commit "Stage 4" pushed | https://github.com/Luca1212x5/autoservice-manager/commits/main | commit history |
+| S4-R1 | 2+ components in src/components/ | https://github.com/Luca1212x5/autoservice-manager/tree/9c167bd207a814d9a8d3ced2360723df9f81a95c/frontend/src/components | open folder |
+| S4-R2 | card receives data through props | https://github.com/Luca1212x5/autoservice-manager/blob/9c167bd207a814d9a8d3ced2360723df9f81a95c/frontend/src/components/InterventieCard.jsx#L8 | read |
+| S4-R3 | map + key={id}, no console warnings | https://github.com/Luca1212x5/autoservice-manager/blob/9c167bd207a814d9a8d3ced2360723df9f81a95c/frontend/src/components/InterventieList.jsx#L12-L14 | F12, Console |
+| S4-R4 | message for empty list | https://github.com/Luca1212x5/autoservice-manager/blob/9c167bd207a814d9a8d3ced2360723df9f81a95c/frontend/src/components/InterventieList.jsx#L5-L7 | set array to [] |
+| S4-R5 | state changes the card look | https://github.com/Luca1212x5/autoservice-manager/blob/9c167bd207a814d9a8d3ced2360723df9f81a95c/frontend/src/components/InterventieCard.jsx#L10 | toggle a done flag |
+| S4-R6 | README Stage 4 section + AI log | https://github.com/Luca1212x5/autoservice-manager/blob/9c167bd207a814d9a8d3ced2360723df9f81a95c/ai-log/etapa-04.md | read |
+| S4-R7 | commit "Stage 4" pushed | https://github.com/Luca1212x5/autoservice-manager/commit/9c167bd207a814d9a8d3ced2360723df9f81a95c | commit history |
