@@ -1,3 +1,6 @@
+// frontend/src/App.jsx
+import InterventieList from "./components/InterventieList.jsx";
+
 const interventii = [
   { id: 1, interventie: "Oil change VW Golf", completed: false, serviceType: "Mechanics" },
   { id: 2, interventie: "Replace battery Ford Focus", completed: true, serviceType: "Electrical" },
@@ -19,8 +22,8 @@ export default function App() {
       <main className="container">
         <section className="panel">
           <h2>Service Interventions</h2>
-          {/* Temporar: date brute; componentele apar in Etapa 4 */}
-          <pre>{JSON.stringify(interventii, null, 2)}</pre>
+          {/* Aici am înlocuit tag-ul <pre> cu componenta noastră */}
+          <InterventieList interventii={interventii} />
         </section>
       </main>
     </>

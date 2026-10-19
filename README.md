@@ -16,12 +16,17 @@ A simple web application to manage car repairs and service interventions for mec
 3. Paint front bumper BMW, active, Bodywork
 
 ## How to run
-Open `index.html` in a browser. No build step, no server.
+cd frontend
+npm install
+npm run dev
+Then open the address printed in the terminal (http://localhost:5173).
 
 ## Status
 - [x] Stage 1: static mockup
 - [x] Stage 2: data logic in JavaScript
 - [x] Stage 3: Vite and React project
+- [x] Stage 4: components rendered from data
+- [ ] Stage 5: local state and events
 
 ---
 
@@ -70,14 +75,10 @@ Plain JavaScript, no DOM. `interventii.js` holds the array and the functions tha
 | S2-R6 | README Stage 2 section + AI log | https://github.com/Luca1212x5/autoservice-manager/blob/main/ai-log/etapa-02.md | read |
 | S2-R7 | commit "Stage 2" pushed | https://github.com/Luca1212x5/autoservice-manager/commit/8d58d3cbd2833e9ef7c6b2cbea08c59d31bbadf7 | commit history |
 
+---
+
 ## Stage 3: Vite and React project
 The app now lives in frontend/, built with Vite. The data from stage 2 moved into the main component; the list is still printed raw.
-
-## How to run
-cd frontend
-npm install
-npm run dev
-Then open the address printed in the terminal (http://localhost:5173).
 
 ### Stage 3 Checklist
 
@@ -90,3 +91,22 @@ Then open the address printed in the terminal (http://localhost:5173).
 | S3-R5 | node_modules ignored, build passes | https://github.com/Luca1212x5/autoservice-manager/blob/main/frontend/.gitignore | npm run build |
 | S3-R6 | README Stage 3 section + AI log | https://github.com/Luca1212x5/autoservice-manager/blob/main/ai-log/etapa-03.md | read |
 | S3-R7 | commit "Stage 3" pushed | https://github.com/Luca1212x5/autoservice-manager/commits/main | commit history |
+
+---
+
+## Stage 4: Components
+The list is rendered from the data, through two components:
+* `InterventieList` receives the whole array and renders one card per item.
+* `InterventieCard` receives a single item through props and displays it.
+
+### Stage 4 Checklist
+
+| ID | Requirement | Where (permalink) | How to check |
+| --- | --- | --- | --- |
+| S4-R1 | 2+ components in src/components/ | https://github.com/Luca1212x5/autoservice-manager/tree/main/frontend/src/components | open folder |
+| S4-R2 | card receives data through props | https://github.com/Luca1212x5/autoservice-manager/blob/main/frontend/src/components/InterventieCard.jsx | read |
+| S4-R3 | map + key={id}, no console warnings | https://github.com/Luca1212x5/autoservice-manager/blob/main/frontend/src/components/InterventieList.jsx | F12, Console |
+| S4-R4 | message for empty list | https://github.com/Luca1212x5/autoservice-manager/blob/main/frontend/src/components/InterventieList.jsx | set array to [] |
+| S4-R5 | state changes the card look | https://github.com/Luca1212x5/autoservice-manager/blob/main/frontend/src/components/InterventieCard.jsx | toggle a done flag |
+| S4-R6 | README Stage 4 section + AI log | https://github.com/Luca1212x5/autoservice-manager/blob/main/ai-log/etapa-04.md | read |
+| S4-R7 | commit "Stage 4" pushed | https://github.com/Luca1212x5/autoservice-manager/commits/main | commit history |
