@@ -21,7 +21,7 @@ Open `index.html` in a browser. No build step, no server.
 ## Status
 - [x] Stage 1: static mockup
 - [x] Stage 2: data logic in JavaScript
-- [ ] Stage 3: Vite and React project
+- [x] Stage 3: Vite and React project
 
 ---
 
@@ -69,3 +69,24 @@ Plain JavaScript, no DOM. `interventii.js` holds the array and the functions tha
 | S2-R5 | original array unchanged after add | https://github.com/Luca1212x5/autoservice-manager/blob/8d58d3cbd2833e9ef7c6b2cbea08c59d31bbadf7/interventii.js#L68-L70 | console line |
 | S2-R6 | README Stage 2 section + AI log | https://github.com/Luca1212x5/autoservice-manager/blob/main/ai-log/etapa-02.md | read |
 | S2-R7 | commit "Stage 2" pushed | https://github.com/Luca1212x5/autoservice-manager/commit/8d58d3cbd2833e9ef7c6b2cbea08c59d31bbadf7 | commit history |
+
+## Stage 3: Vite and React project
+The app now lives in frontend/, built with Vite. The data from stage 2 moved into the main component; the list is still printed raw.
+
+## How to run
+cd frontend
+npm install
+npm run dev
+Then open the address printed in the terminal (http://localhost:5173).
+
+### Stage 3 Checklist
+
+| ID | Requirement | Where (permalink) | How to check |
+| --- | --- | --- | --- |
+| S3-R1 | npm run dev starts without errors | https://github.com/Luca1212x5/autoservice-manager/blob/main/frontend/package.json | npm install, npm run dev |
+| S3-R2 | app name and counter computed from data | https://github.com/Luca1212x5/autoservice-manager/blob/main/frontend/src/App.jsx | edit data, save |
+| S3-R3 | data from README, not from the example | https://github.com/Luca1212x5/autoservice-manager/blob/main/frontend/src/App.jsx | compare with README |
+| S3-R4 | stage 1 styles reused | https://github.com/Luca1212x5/autoservice-manager/blob/main/frontend/src/App.css | look at the page |
+| S3-R5 | node_modules ignored, build passes | https://github.com/Luca1212x5/autoservice-manager/blob/main/frontend/.gitignore | npm run build |
+| S3-R6 | README Stage 3 section + AI log | https://github.com/Luca1212x5/autoservice-manager/blob/main/ai-log/etapa-03.md | read |
+| S3-R7 | commit "Stage 3" pushed | https://github.com/Luca1212x5/autoservice-manager/commits/main | commit history |
