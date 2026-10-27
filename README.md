@@ -26,7 +26,8 @@ Then open the address printed in the terminal (http://localhost:5173).
 - [x] Stage 2: data logic in JavaScript
 - [x] Stage 3: Vite and React project
 - [x] Stage 4: components rendered from data
-- [ ] Stage 5: local state and events
+- [x] Stage 5: local state and events
+- [ ] Stage 6: loading data from a mock API
 
 ---
 
@@ -96,8 +97,8 @@ The app now lives in frontend/, built with Vite. The data from stage 2 moved int
 
 ## Stage 4: Components
 The list is rendered from the data, through two components:
-* `InterventieList` receives the whole array and renders one card per item.
-* `InterventieCard` receives a single item through props and displays it.
+- `InterventieList` receives the whole array and renders one card per item.
+- `InterventieCard` receives a single item through props and displays it.
 
 ### Stage 4 Checklist
 
@@ -110,3 +111,21 @@ The list is rendered from the data, through two components:
 | S4-R5 | state changes the card look | https://github.com/Luca1212x5/autoservice-manager/blob/9c167bd207a814d9a8d3ced2360723df9f81a95c/frontend/src/components/InterventieCard.jsx#L12 | toggle a done flag |
 | S4-R6 | README Stage 4 section + AI log | https://github.com/Luca1212x5/autoservice-manager/blob/9c167bd207a814d9a8d3ced2360723df9f81a95c/ai-log/etapa-04.md | read |
 | S4-R7 | commit "Stage 4" pushed | https://github.com/Luca1212x5/autoservice-manager/commit/9c167bd207a814d9a8d3ced2360723df9f81a95c | commit history |
+
+---
+
+## Stage 5: local state and events
+The list lives in React state. Checking and deleting work from the page, and the counters in the header follow automatically. A button in the header switches between light and dark mode. Changes are lost on refresh, which is what stage 6 and stage 10 fix.
+
+### Stage 5 Checklist
+
+| ID | Requirement | Where (permalink) | How to check |
+| --- | --- | --- | --- |
+| S5-R1 | list kept in useState, in App | https://github.com/Luca1212x5/autoservice-manager/blob/ba1c47362ef04c17b82dc80666e596b33e80758a/frontend/src/App.jsx#L15 | read |
+| S5-R2 | toggling changes state and card look | https://github.com/Luca1212x5/autoservice-manager/blob/ba1c47362ef04c17b82dc80666e596b33e80758a/frontend/src/App.jsx#L18-L22 <br> https://github.com/Luca1212x5/autoservice-manager/blob/ba1c47362ef04c17b82dc80666e596b33e80758a/frontend/src/components/InterventieCard.jsx#L12-L14 | click a checkbox |
+| S5-R3 | delete removes the item | https://github.com/Luca1212x5/autoservice-manager/blob/ba1c47362ef04c17b82dc80666e596b33e80758a/frontend/src/App.jsx#L24-L26 <br> https://github.com/Luca1212x5/autoservice-manager/blob/ba1c47362ef04c17b82dc80666e596b33e80758a/frontend/src/components/InterventieCard.jsx#L23-L25 | click Delete |
+| S5-R4 | header counter derived, not in state | https://github.com/Luca1212x5/autoservice-manager/blob/ba1c47362ef04c17b82dc80666e596b33e80758a/frontend/src/App.jsx#L34 | toggle, watch header |
+| S5-R5 | immutable updates (no push, splice, assignment) | https://github.com/Luca1212x5/autoservice-manager/blob/ba1c47362ef04c17b82dc80666e596b33e80758a/frontend/src/App.jsx#L18-L26 | read |
+| S5-R6 | light/dark toggle: state + data-theme on html | https://github.com/Luca1212x5/autoservice-manager/blob/ba1c47362ef04c17b82dc80666e596b33e80758a/frontend/src/App.jsx#L28-L32 <br> https://github.com/Luca1212x5/autoservice-manager/blob/ba1c47362ef04c17b82dc80666e596b33e80758a/frontend/src/App.css#L91-L98 | click the button, both system themes |
+| S5-R7 | no console warnings; README + AI log | https://github.com/Luca1212x5/autoservice-manager/blob/ba1c47362ef04c17b82dc80666e596b33e80758a/ai-log/etapa-05.md | F12, Console |
+| S5-R8 | commit "Stage 5" pushed | https://github.com/Luca1212x5/autoservice-manager/commit/ba1c47362ef04c17b82dc80666e596b33e80758a | commit history |

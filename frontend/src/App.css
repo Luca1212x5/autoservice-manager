@@ -29,6 +29,7 @@ body {
   color: white;
   text-align: center;
   padding: 32px 16px;
+  position: relative; /* Adăugat pentru butonul de temă */
 }
 .app-header h1 { margin: 0 0 8px 0; }
 .app-header p { margin: 0; }
@@ -52,40 +53,7 @@ body {
 }
 .panel h2 { margin-top: 0; margin-bottom: 20px; font-size: 1.25rem; }
 
-.item-form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.item-form label {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  font-weight: bold;
-  font-size: 0.9rem;
-}
-.item-form input, .item-form select {
-  padding: 10px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  font-size: 1rem;
-  background: var(--card);
-  color: var(--text);
-}
-.item-form button {
-  background: var(--accent);
-  color: white;
-  border: none;
-  padding: 12px;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 1rem;
-  margin-top: 8px;
-}
-.item-form button:hover { background: var(--accent-dark); }
-
-.item-list {
+.task-list {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -94,7 +62,7 @@ body {
   gap: 12px;
 }
 
-.item-card {
+.task-card {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -102,13 +70,11 @@ body {
   border: 1px solid var(--border);
   border-radius: 10px;
 }
-.item-card:hover {
+.task-card:hover {
   border-color: var(--accent);
   background-color: var(--accent-soft);
 }
-.item-card h3 { margin: 0 0 8px 0; font-size: 1.1rem; }
-
-.status { color: var(--muted); font-size: 0.9rem; font-weight: bold; }
+.task-card h3 { margin: 0 0 8px 0; font-size: 1.1rem; }
 
 /* Etichetele (badges) */
 .badge {
@@ -124,7 +90,7 @@ body {
 .badge-bodywork { background: var(--color-bodywork); }
 
 /* Cardul finalizat (done) */
-.item-card.done h3 {
+.task-card.done h3 {
   text-decoration: line-through;
   color: var(--muted);
 }
@@ -149,7 +115,7 @@ body {
 
 /* Tema intunecata */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg: #14121d;
     --card: #1e1b2e;
     --text: #e5e7eb;
@@ -158,3 +124,47 @@ body {
     --accent-soft: #2a2342;
   }
 }
+
+:root[data-theme="dark"] {
+  --bg: #14121d;
+  --card: #1e1b2e;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --border: #352f4d;
+  --accent-soft: #2a2342;
+}
+
+/* Elemente interactive Etapa 5 */
+.theme-toggle {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  padding: 6px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.theme-toggle:hover { background: rgba(255, 255, 255, 0.15); }
+
+.task-main { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+.task-main input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.btn-danger {
+  border: 1px solid #ff4a4a;
+  background: transparent;
+  color: #ff4a4a;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font: inherit;
+  cursor: pointer;
+}
+.btn-danger:hover { background: #ff4a4a; color: #fff; }
