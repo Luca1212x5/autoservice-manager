@@ -122,10 +122,10 @@ The list lives in React state. Checking and deleting work from the page, and the
 | ID | Requirement | Where (permalink) | How to check |
 | --- | --- | --- | --- |
 | S5-R1 | list kept in useState, in App | https://github.com/Luca1212x5/autoservice-manager/blob/ba1c47362ef04c17b82dc80666e596b33e80758a/frontend/src/App.jsx#L15 | read |
-| S5-R2 | toggling changes state and card look | https://github.com/Luca1212x5/autoservice-manager/blob/ba1c47362ef04c17b82dc80666e596b33e80758a/frontend/src/App.jsx#L18-L22 <br> https://github.com/Luca1212x5/autoservice-manager/blob/ba1c47362ef04c17b82dc80666e596b33e80758a/frontend/src/components/InterventieCard.jsx#L12-L14 | click a checkbox |
-| S5-R3 | delete removes the item | https://github.com/Luca1212x5/autoservice-manager/blob/ba1c47362ef04c17b82dc80666e596b33e80758a/frontend/src/App.jsx#L24-L26 <br> https://github.com/Luca1212x5/autoservice-manager/blob/ba1c47362ef04c17b82dc80666e596b33e80758a/frontend/src/components/InterventieCard.jsx#L23-L25 | click Delete |
+| S5-R2 | toggling changes state and card look | https://github.com/Luca1212x5/autoservice-manager/blob/ba1c47362ef04c17b82dc80666e596b33e80758a/frontend/src/components/InterventieCard.jsx#L10-L14 | click a checkbox |
+| S5-R3 | delete removes the item | https://github.com/Luca1212x5/autoservice-manager/blob/ba1c47362ef04c17b82dc80666e596b33e80758a/frontend/src/App.jsx#L24-L26 | click Delete |
 | S5-R4 | header counter derived, not in state | https://github.com/Luca1212x5/autoservice-manager/blob/ba1c47362ef04c17b82dc80666e596b33e80758a/frontend/src/App.jsx#L34 | toggle, watch header |
 | S5-R5 | immutable updates (no push, splice, assignment) | https://github.com/Luca1212x5/autoservice-manager/blob/ba1c47362ef04c17b82dc80666e596b33e80758a/frontend/src/App.jsx#L18-L26 | read |
-| S5-R6 | light/dark toggle: state + data-theme on html | https://github.com/Luca1212x5/autoservice-manager/blob/ba1c47362ef04c17b82dc80666e596b33e80758a/frontend/src/App.jsx#L28-L32 <br> https://github.com/Luca1212x5/autoservice-manager/blob/ba1c47362ef04c17b82dc80666e596b33e80758a/frontend/src/App.css#L91-L98 | click the button, both system themes |
+| S5-R6 | light/dark toggle: state + data-theme on html | https://github.com/Luca1212x5/autoservice-manager/blob/ba1c47362ef04c17b82dc80666e596b33e80758a/frontend/src/App.jsx#L28-L32 | click the button, both system themes |
 | S5-R7 | no console warnings; README + AI log | https://github.com/Luca1212x5/autoservice-manager/blob/ba1c47362ef04c17b82dc80666e596b33e80758a/ai-log/etapa-05.md | F12, Console |
 | S5-R8 | commit "Stage 5" pushed | https://github.com/Luca1212x5/autoservice-manager/commit/ba1c47362ef04c17b82dc80666e596b33e80758a | commit history |
