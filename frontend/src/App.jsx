@@ -1,5 +1,6 @@
 import { useState } from "react";
 import InterventieList from "./components/InterventieList.jsx";
+import "./App.css";
 
 const INTERVENTII_INITIALE = [
   { id: 1, interventie: "Oil change VW Golf", completed: false, serviceType: "Mechanics" },
@@ -14,6 +15,7 @@ function temaInitiala() {
 export default function App() {
   const [interventii, setInterventii] = useState(INTERVENTII_INITIALE);
   const [tema, setTema] = useState(temaInitiala);
+  const [showServices, setShowServices] = useState(false);
 
   function handleToggle(id) {
     setInterventii((prev) =>
@@ -36,6 +38,10 @@ export default function App() {
   return (
     <>
       <header className="app-header">
+        <button className="btn-services" onClick={() => setShowServices(true)}>
+          ⚙️ Tipuri de service
+        </button>
+
         <button className="theme-toggle" onClick={handleTema} aria-pressed={tema === "dark"}>
           {tema === "dark" ? "Mod luminos" : "Mod întunecat"}
         </button>
@@ -45,12 +51,41 @@ export default function App() {
           {interventii.length} interventions, {active} active
         </p>
       </header>
+
       <main className="container">
         <section className="panel">
           <h2>Service Interventions</h2>
           <InterventieList interventii={interventii} onToggle={handleToggle} onDelete={handleDelete} />
         </section>
       </main>
+
+      <div className="bmw-footer-showcase">
+        <img 
+          src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&w=1200" 
+          alt="BMW Seria 3 M-Sport" 
+        />
+      </div>
+
+      {showServices && (
+        <div className="modal-overlay" onClick={() => setShowServices(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-image"></div>
+            <div className="modal-info">
+              <h2>Servicii Auto Premium</h2>
+              <ul>
+                <li>🛢️ Schimb ulei, filtre și mentenanță standard</li>
+                <li>🛠️ Sablare și recondiționare componente metalice</li>
+                <li>✨ Polisare profesională caroserie și faruri</li>
+                <li>⚙️ Refacere filete și prelucrări mecanice fine</li>
+                <li>🏎️ Diagnoză completă și pachet performanță M-Sport</li>
+              </ul>
+              <button className="close-btn" onClick={() => setShowServices(false)}>
+                Închide meniul
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
