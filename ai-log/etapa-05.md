@@ -4,7 +4,7 @@
 - Gemini
 
 ## Conversations
-- [Adaugă linkul conversației aici]
+- [https://share.gemini.google/OumkYyFeNiHb]
 
 ## Key requests
 
