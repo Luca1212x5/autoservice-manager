@@ -1,61 +1,573 @@
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
+/* 1. PALETA DE CULORI BMW M + CULORI SEMAFOR CAPACITATE */
 :root {
-  --bg: #f4f5f7;
+  --m-light-blue: #0066b1;
+  --m-dark-blue: #0b192c;
+  --m-red: #e01e37;
+
+  /* Semafor atelier: Verde (0-5), Portocaliu (6-10), Roșu (11-15) */
+  --cap-green: #10b981;
+  --cap-orange: #f59e0b;
+  --cap-red: #ef4444;
+
+  --bg: #f0f4f8;
   --card: #ffffff;
-  --text: #1f2933;
-  --muted: #6b7280;
-  --accent: #16a34a;
-  --accent-dark: #15803d;
-  --accent-soft: #dcfce7;
-  --border: #e5e7eb;
+  --text: #0b192c;
+  --muted: #52637a;
+  --border: #d8e2ed;
+  --header-bg: linear-gradient(135deg, #06101e 0%, #0b192c 55%, #004b87 100%);
 }
 
 :root[data-theme="dark"] {
-  --bg: #111827;
-  --card: #1f2937;
-  --text: #f9fafb;
-  --muted: #9ca3af;
-  --accent-soft: #14532d;
-  --border: #374151;
+  --bg: #070d17;
+  --card: #111d30;
+  --text: #f1f5f9;
+  --muted: #94a3b8;
+  --border: #1e324d;
+  --header-bg: linear-gradient(135deg, #03070e 0%, #081221 60%, #160a14 100%);
 }
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.5;
+  transition: background-color 0.35s ease, color 0.35s ease;
+  overflow-x: hidden;
 }
 
+/* DUNGILE TRICOLORE BMW M ANIMATE */
+.m-stripes-top {
+  height: 6px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--m-light-blue) 0%,
+    var(--m-light-blue) 33.3%,
+    var(--m-dark-blue) 33.3%,
+    var(--m-dark-blue) 66.6%,
+    var(--m-red) 66.6%,
+    var(--m-red) 100%
+  );
+  background-size: 200% 100%;
+  animation: mStripePulse 6s infinite alternate ease-in-out;
+}
+
+@keyframes mStripePulse {
+  0% { filter: brightness(1); }
+  100% { filter: brightness(1.35); }
+}
+
+/* 2. HEADER & BARA DE NAVIGAȚIE */
 .app-header {
-  background: var(--accent);
-  color: white;
-  text-align: center;
-  padding: 32px 16px;
+  background: var(--header-bg);
+  color: #ffffff;
   position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
-.app-header h1 { margin: 0 0 8px 0; }
-.app-count { opacity: 0.9; margin: 0; font-size: 0.9rem; }
 
+.navbar-top {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.25s ease;
+}
+
+.brand-logo:hover {
+  transform: scale(1.04);
+}
+
+.m-bars {
+  display: flex;
+  gap: 3px;
+  transform: skewX(-18deg);
+}
+
+.m-bar {
+  width: 7px;
+  height: 28px;
+  display: inline-block;
+  border-radius: 1px;
+}
+
+.m-bar.blue-light { background: var(--m-light-blue); }
+.m-bar.blue-dark { background: #1d4ed8; }
+.m-bar.red { background: var(--m-red); }
+
+.brand-text {
+  font-size: 1.9rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: lowercase;
+  background: linear-gradient(90deg, #ffffff, #93c5fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-sub {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #93c5fd;
+  border-left: 2px solid var(--m-red);
+  padding-left: 8px;
+  max-width: 110px;
+  line-height: 1.1;
+}
+
+/* SLIDER-UL DIN MIJLOC SUS */
+.nav-slider {
+  display: flex;
+  background: rgba(255, 255, 255, 0.07);
+  padding: 6px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.slide-tab {
+  background: transparent;
+  color: #e2e8f0;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slide-tab:hover {
+  color: #ffffff;
+  background: rgba(0, 102, 177, 0.35);
+  transform: translateY(-2px);
+}
+
+.slide-tab.active {
+  background: linear-gradient(135deg, var(--m-light-blue) 0%, var(--m-red) 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(224, 30, 55, 0.45);
+  transform: scale(1.03);
+}
+
+.theme-toggle {
+  padding: 10px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  background: rgba(11, 25, 44, 0.6);
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.theme-toggle:hover {
+  background: var(--m-light-blue);
+  border-color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* 3. HERO BANNER */
+.hero-banner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px 24px 42px;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: center;
+  gap: 32px;
+}
+
+@media (max-width: 850px) {
+  .hero-banner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}
+
+.m-badge {
+  display: inline-block;
+  background: rgba(224, 30, 55, 0.2);
+  border-left: 4px solid var(--m-red);
+  color: #fca5a5;
+  padding: 4px 12px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+}
+
+.hero-text h1 {
+  margin: 0 0 10px 0;
+  font-size: 2.3rem;
+  letter-spacing: -0.5px;
+}
+
+.hero-text p {
+  margin: 0 0 14px 0;
+  color: #cbd5e1;
+  font-size: 1.05rem;
+}
+
+.hero-badges-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.app-count {
+  display: inline-block;
+  background: rgba(0, 102, 177, 0.35);
+  border: 1px solid var(--m-light-blue);
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  color: #ffffff !important;
+  margin: 0 !important;
+}
+
+.live-pill {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.85rem;
+}
+
+.live-pill.status-green {
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid var(--cap-green);
+  color: #6ee7b7;
+}
+
+.live-pill.status-orange {
+  background: rgba(245, 158, 11, 0.2);
+  border: 1px solid var(--cap-orange);
+  color: #fcd34d;
+}
+
+.live-pill.status-red {
+  background: rgba(239, 68, 68, 0.25);
+  border: 1px solid var(--cap-red);
+  color: #fca5a5;
+}
+
+.hero-car-anim img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 16px;
+  border: 2px solid var(--m-light-blue);
+  box-shadow: 0 15px 35px rgba(0, 102, 177, 0.45);
+  animation: carFloat 4s ease-in-out infinite alternate;
+}
+
+@keyframes carFloat {
+  0% { transform: translateY(0px) scale(1); }
+  100% { transform: translateY(-8px) scale(1.02); }
+}
+
+/* 4. ANIMAȚII PENTRU SCHIMBAREA SLIDE-URILOR */
 .container {
-  max-width: 800px;
-  margin: 32px auto;
-  padding: 0 16px;
+  max-width: 1200px;
+  margin: 36px auto;
+  padding: 0 20px;
 }
 
+.fade-in-slide {
+  animation: slideEnter 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideEnter {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 32px;
+}
+
+.slide-header h2 {
+  font-size: 1.9rem;
+  margin: 0 0 8px 0;
+  color: var(--m-light-blue);
+}
+
+.slide-header p {
+  color: var(--muted);
+  margin: 0 0 18px 0;
+}
+
+.search-service {
+  width: 100%;
+  max-width: 520px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: 2px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.25s;
+}
+
+.search-service:focus {
+  border-color: var(--m-light-blue);
+}
+
+/* 5. GRIDUL DE SERVICII */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 22px;
+  margin-bottom: 40px;
+}
+
+.service-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--m-light-blue);
+  border-radius: 14px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-top-color 0.3s ease;
+  animation: cardPop 0.4s ease backwards;
+}
+
+@keyframes cardPop {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.service-card:hover {
+  transform: translateY(-7px);
+  border-top-color: var(--m-red);
+  box-shadow: 0 14px 28px rgba(0, 102, 177, 0.18);
+}
+
+.service-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.service-icon { font-size: 2rem; }
+
+.service-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(0, 102, 177, 0.12);
+  color: var(--m-light-blue);
+}
+
+.service-card h3 { margin: 4px 0; font-size: 1.2rem; }
+.service-card p { margin: 0; color: var(--muted); font-size: 0.92rem; flex: 1; }
+
+.service-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+  margin-top: 8px;
+  border-top: 1px dashed var(--border);
+  font-weight: 700;
+}
+
+.service-price { color: var(--m-red); }
+
+/* 6. PANOUL DE INTERVENȚII LIVE & SEMAFORUL DE CAPACITATE (VERDE / PORTOCALIU / ROȘU) */
 .panel {
   background: var(--card);
-  padding: 24px;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  padding: 28px;
+  border-radius: 16px;
+  border: 2px solid var(--border);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  transition: border-color 0.35s ease;
 }
-.panel h2 { margin-top: 0; margin-bottom: 24px; font-size: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: 12px; }
 
-/* Lista și cardurile aliniate orizontal */
+.panel.status-green-border { border-top: 6px solid var(--cap-green); }
+.panel.status-orange-border { border-top: 6px solid var(--cap-orange); }
+.panel.status-red-border { border-top: 6px solid var(--cap-red); }
+
+.panel-header-m {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.panel-header-m h2 { margin: 0 0 4px 0; font-size: 1.35rem; }
+.panel-sub { margin: 0; font-size: 0.9rem; color: var(--muted); }
+
+/* Buton de simulare aleatoare (2-15 mașini) */
+.btn-randomize {
+  background: linear-gradient(135deg, var(--m-light-blue), #004b87);
+  color: #ffffff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0, 102, 177, 0.3);
+}
+
+.btn-randomize:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 18px rgba(0, 102, 177, 0.45);
+}
+
+/* Bannerul Semafor (Verde 0-5, Portocaliu 6-10, Roșu 11-15) */
+.capacity-banner {
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  border: 1px solid var(--border);
+  transition: all 0.35s ease;
+}
+
+.capacity-banner.status-green {
+  background: rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.4);
+}
+
+.capacity-banner.status-orange {
+  background: rgba(245, 158, 11, 0.09);
+  border-color: rgba(245, 158, 11, 0.45);
+}
+
+.capacity-banner.status-red {
+  background: rgba(239, 68, 68, 0.09);
+  border-color: rgba(239, 68, 68, 0.45);
+}
+
+.capacity-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.capacity-badge {
+  font-weight: 900;
+  font-size: 0.95rem;
+  padding: 6px 14px;
+  border-radius: 8px;
+  letter-spacing: 0.5px;
+}
+
+.status-green .capacity-badge {
+  background: var(--cap-green);
+  color: #ffffff;
+}
+
+.status-orange .capacity-badge {
+  background: var(--cap-orange);
+  color: #ffffff;
+}
+
+.status-red .capacity-badge {
+  background: var(--cap-red);
+  color: #ffffff;
+  animation: pulseRed 1.5s infinite alternate;
+}
+
+@keyframes pulseRed {
+  from { box-shadow: 0 0 0 rgba(239, 68, 68, 0.4); }
+  to { box-shadow: 0 0 14px rgba(239, 68, 68, 0.8); }
+}
+
+.capacity-numbers {
+  font-size: 0.95rem;
+}
+
+.capacity-bar-track {
+  width: 100%;
+  height: 12px;
+  background: rgba(0, 0, 0, 0.12);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.capacity-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.35s ease;
+}
+
+.status-green .capacity-bar-fill { background: var(--cap-green); }
+.status-orange .capacity-bar-fill { background: var(--cap-orange); }
+.status-red .capacity-bar-fill { background: var(--cap-red); }
+
+.capacity-advice {
+  margin: 0 0 14px 0;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.capacity-legend {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 0.82rem;
+  color: var(--muted);
+  border-top: 1px dashed var(--border);
+  padding-top: 10px;
+}
+
+.capacity-legend span {
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+
+.capacity-legend span.active-zone {
+  font-weight: 800;
+  color: var(--text);
+  border-color: var(--m-light-blue);
+  transform: scale(1.03);
+}
+
+/* Lista și cardurile individuale de pe elevatoare */
 .panel ul, .item-list {
   list-style-type: none;
   padding: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -64,91 +576,396 @@ body {
 .panel li, .card {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 16px;
   background: var(--bg);
-  padding: 16px;
+  padding: 16px 20px;
+  border-radius: 10px;
+  border-left: 5px solid var(--m-light-blue);
+  border-top: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.panel li:hover, .card:hover {
+  transform: translateX(6px);
+  box-shadow: 0 6px 15px rgba(0, 102, 177, 0.12);
+}
+
+.panel li.done, .card.done {
+  opacity: 0.55;
+  border-left-color: var(--cap-green);
+}
+
+.panel li.done h3, .card.done h3 {
+  text-decoration: line-through;
+}
+
+.panel li h3, .card h3 {
+  margin: 0;
+  flex: 1;
+  font-size: 1.02rem;
+}
+
+.panel li p, .panel li span, .card p, .card span {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--m-light-blue);
+  font-weight: 700;
+}
+
+/* Butonul de Ștergere: Dreptunghi Roșu M cu colțuri rotunjite */
+.panel li button, .card button, .btn-delete {
+  background-color: var(--m-red);
+  color: #ffffff;
+  border: none;
+  padding: 9px 18px;
   border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 10px rgba(224, 30, 55, 0.3);
+}
+
+.panel li button:hover, .card button:hover, .btn-delete:hover {
+  background-color: #be123c;
+  transform: scale(1.06);
+}
+
+/* 7. SLIDE 2: POLISARE ȘI FINISARE */
+.polish-showcase {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 28px;
+  align-items: center;
+  margin-bottom: 36px;
+}
+
+@media (max-width: 850px) {
+  .polish-showcase { grid-template-columns: 1fr; }
+}
+
+.polish-image-box {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 2px solid var(--m-light-blue);
+}
+
+.polish-image-box img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  display: block;
+}
+
+.shine-overlay {
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: skewX(-25deg);
+  animation: polishSweep 3.5s infinite;
+}
+
+@keyframes polishSweep {
+  0% { left: -120%; }
+  60%, 100% { left: 160%; }
+}
+
+.badge-garantie {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  background: var(--m-red);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-weight: 800;
+  font-size: 0.85rem;
+}
+
+.polish-steps { display: flex; flex-direction: column; gap: 16px; }
+
+.step-box {
+  display: flex;
+  gap: 16px;
+  background: var(--card);
+  padding: 18px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  transition: transform 0.25s ease;
+}
+
+.step-box:hover {
+  transform: translateX(8px);
+  border-color: var(--m-light-blue);
+}
+
+.step-num { font-size: 1.6rem; font-weight: 900; color: var(--m-light-blue); }
+.step-box h4 { margin: 0 0 6px 0; }
+.step-box p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+
+.reviews-box {
+  background: var(--card);
+  padding: 24px;
+  border-radius: 14px;
   border: 1px solid var(--border);
 }
-.panel li.done, .card.done { opacity: 0.6; }
-.panel li.done h3, .card.done h3 { text-decoration: line-through; }
 
-.panel li h3, .card h3 { margin: 0; flex: 1; font-size: 1.05rem; }
-.panel li p, .panel li span, .card p, .card span { margin: 0; font-size: 0.9rem; color: var(--muted); font-weight: 500; }
-
-/* Butonul de Ștergere (Roșu și rotunjit) */
-.panel li button, .card button {
-  background-color: #ef4444;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background-color 0.2s ease;
-  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.2);
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+  margin-top: 14px;
 }
 
-.panel li button:hover, .card button:hover {
-  background-color: #dc2626;
+.review-card {
+  background: var(--bg);
+  padding: 18px;
+  border-radius: 10px;
+  border-left: 4px solid var(--m-red);
 }
 
-.theme-toggle {
-  position: absolute;
-  top: 12px;
-  right: 16px;
-  padding: 6px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  cursor: pointer;
+.review-card p { margin: 0 0 10px 0; font-style: italic; }
+.review-card span { font-weight: 700; font-size: 0.85rem; color: var(--m-light-blue); }
+
+/* 8. SLIDE 3: TRACTĂRI OFERITE DE SERVICE */
+.towing-banner {
+  background: linear-gradient(135deg, var(--m-dark-blue), #162a45);
+  color: #ffffff;
+  padding: 32px;
+  border-radius: 16px;
+  border-left: 6px solid var(--m-red);
+  margin-bottom: 32px;
 }
 
-.btn-services {
-  position: absolute;
-  top: 12px;
-  left: 16px;
-  padding: 6px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
+.emergency-tag {
+  background: var(--m-red);
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 800;
 }
-.btn-services:hover, .theme-toggle:hover { background: rgba(255, 255, 255, 0.25); }
 
-/* Meniul Modal */
-.modal-overlay {
-  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex; justify-content: center; align-items: center; z-index: 1000;
+.towing-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 22px;
 }
-.modal-content {
+
+.towing-stats div {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.towing-stats strong { display: block; font-size: 1.6rem; color: #38bdf8; }
+
+/* 9. SLIDE 4: DESPRE NOI */
+.about-hero-card {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 28px;
   background: var(--card);
-  color: var(--text);
-  border-radius: 12px;
-  width: 800px; max-width: 90%;
-  display: grid; grid-template-columns: 1fr 1fr;
-  overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  margin-bottom: 32px;
+  align-items: center;
 }
-@media (max-width: 700px) {
-  .modal-content { grid-template-columns: 1fr; }
-  .modal-image { min-height: 200px; }
-}
-.modal-image {
-  background-image: url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=600&q=80');
-  background-size: cover; background-position: center; min-height: 400px;
-}
-.modal-info { padding: 30px; display: flex; flex-direction: column; }
-.modal-info h2 { margin-top: 0; color: var(--accent); }
-.modal-info ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 12px; }
-.modal-info li { padding: 10px; background: var(--bg); border-left: 4px solid var(--accent); border-radius: 4px; font-weight: 500; }
-.close-btn { margin-top: auto; padding: 10px; background: var(--accent); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
 
-/* Poza cu BMW */
-.bmw-footer-showcase {
-  max-width: 1000px; margin: 40px auto; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+@media (max-width: 850px) {
+  .about-hero-card { grid-template-columns: 1fr; }
 }
-.bmw-footer-showcase img { width: 100%; height: 350px; object-fit: cover; display: block; }
+
+.about-hero-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.timeline-m {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+.timeline-item {
+  background: var(--card);
+  padding: 20px;
+  border-radius: 12px;
+  border-top: 4px solid var(--m-light-blue);
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: transform 0.25s ease;
+}
+
+.timeline-item:hover {
+  transform: translateY(-5px);
+  border-top-color: var(--m-red);
+}
+
+.timeline-item .year { font-size: 0.78rem; font-weight: 900; color: var(--m-red); }
+.timeline-item h4 { margin: 8px 0; }
+.timeline-item p { margin: 0; font-size: 0.9rem; color: var(--muted); }
+
+/* 10. FOOTER SHOWCASE */
+.bmw-footer-showcase {
+  background: var(--m-dark-blue);
+  color: #ffffff;
+  margin-top: 60px;
+  padding-bottom: 28px;
+}
+
+.footer-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 20px 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.footer-car-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.footer-car-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.footer-car-card:hover img { transform: scale(1.08); }
+
+.car-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(11, 25, 44, 0.95));
+  padding: 16px 12px 10px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.footer-copy {
+  text-align: center;
+  margin: 12px 0 0 0;
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+/* Panou pur vizual pentru client: ascundem checkbox-ul și butonul Șterge */
+.live-board input[type="checkbox"],
+.live-board li button,
+.live-board .card button,
+.live-board .btn-delete {
+  display: none !important;
+}
+
+/* Păstrăm aspectul uniform, fără text tăiat pe panoul clientului */
+.live-board li.done,
+.live-board .card.done {
+  opacity: 1;
+  border-left-color: var(--m-light-blue);
+}
+
+.live-board li.done h3,
+.live-board .card.done h3 {
+  text-decoration: none;
+}
+/* SCENA CINEMATICĂ BMW M3 COMPETITION (SCROLL ZOOM DIN ÎNTUNERIC) */
+.m3-dark-tunnel {
+  background: #000000;
+  color: #ffffff;
+  margin-top: 70px;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 30px;
+}
+
+.m3-stage {
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 60px 20px;
+  /* Vignetă radială ca mașina să pară că iese din beznă */
+  background: radial-gradient(circle at center, rgba(0, 102, 177, 0.14) 0%, #000000 72%);
+}
+
+.m3-headlight-glow {
+  position: absolute;
+  width: 650px;
+  height: 300px;
+  background: radial-gradient(ellipse at center, rgba(0, 102, 177, 0.55) 0%, rgba(224, 30, 55, 0.25) 45%, transparent 75%);
+  filter: blur(45px);
+  pointer-events: none;
+  z-index: 1;
+  transition: transform 0.08s linear, opacity 0.08s linear;
+}
+
+.m3-front-wrapper {
+  position: relative;
+  z-index: 2;
+  max-width: 960px;
+  width: 100%;
+  will-change: transform, opacity, filter;
+  transition: transform 0.06s linear, opacity 0.06s linear, filter 0.06s linear;
+}
+
+.m3-front-img {
+  width: 100%;
+  height: auto;
+  max-height: 520px;
+  object-fit: cover;
+  border-radius: 18px;
+  /* Mască întunecată pe margini pentru integrare perfectă în fundalul negru */
+  box-shadow: 0 0 90px 30px #000000 inset, 0 20px 60px rgba(0, 0, 0, 0.95);
+  display: block;
+}
+
+.m3-tunnel-title {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  margin-top: 28px;
+  pointer-events: none;
+}
+
+.m3-badge-red {
+  background: var(--m-red);
+  color: #ffffff;
+  padding: 5px 14px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.m3-tunnel-title h2 {
+  margin: 12px 0 6px;
+  font-size: 2.2rem;
+  letter-spacing: 2px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+}
+
+.m3-tunnel-title p {
+  margin: 0;
+  color: #93c5fd;
+  font-weight: 600;
+}
