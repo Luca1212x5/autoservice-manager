@@ -148,10 +148,10 @@ The application's data is now served by a mock REST API using `json-server`. The
 
 | ID | Requirement | Where (permalink) | How to check |
 | --- | --- | --- | --- |
-| S6-R1 | npm run api starts, route shows JSON | https://github.com/Luca1212x5/autoservice-manager/blob/03e9c77b80ff117a641ed27c0f30e6b4ded21417/frontend/package.json | open localhost:3001/interventii |
+| S6-R1 | npm run api starts, route shows JSON | https://github.com/Luca1212x5/autoservice-manager/blob/03e9c77b80ff117a641ed27c0f30e6b4ded21417/frontend/package.json#L7 | open localhost:3001/interventii |
 | S6-R2 | data no longer in React code | https://github.com/Luca1212x5/autoservice-manager/blob/03e9c77b80ff117a641ed27c0f30e6b4ded21417/frontend/db.json | read |
-| S6-R3 | loading message while waiting | https://github.com/Luca1212x5/autoservice-manager/blob/03e9c77b80ff117a641ed27c0f30e6b4ded21417/frontend/src/App.jsx | --delay 4000 |
-| S6-R4 | error message when API is down | https://github.com/Luca1212x5/autoservice-manager/blob/03e9c77b80ff117a641ed27c0f30e6b4ded21417/frontend/src/App.jsx | stop npm run api, refresh |
-| S6-R5 | fetch only in api.js, URL from env | https://github.com/Luca1212x5/autoservice-manager/blob/03e9c77b80ff117a641ed27c0f30e6b4ded21417/frontend/src/api.js | search for fetch |
-| S6-R6 | README Stage 6 section + AI log | https://github.com/Luca1212x5/autoservice-manager/blob/03e9c77b80ff117a641ed27c0f30e6b4ded21417/ai-log/etapa-06.md | read |
+| S6-R3 | loading message while waiting | https://github.com/Luca1212x5/autoservice-manager/blob/03e9c77b80ff117a641ed27c0f30e6b4ded21417/frontend/src/App.jsx#L268-L269 | --delay 4000 |
+| S6-R4 | error message when API is down | https://github.com/Luca1212x5/autoservice-manager/blob/03e9c77b80ff117a641ed27c0f30e6b4ded21417/frontend/src/App.jsx#L271-L275 | stop npm run api, refresh |
+| S6-R5 | fetch only in api.js, URL from env | https://github.com/Luca1212x5/autoservice-manager/blob/03e9c77b80ff117a641ed27c0f30e6b4ded21417/frontend/src/api.js#L3-L9 | search for fetch |
+| S6-R6 | README Stage 6 section + AI log | https://github.com/Luca1212x5/autoservice-manager/blob/15c2e7384fa5439cfd0efca95921359dfda6ec3f/ai-log/etapa-06.md?plain=1 | read |
 | S6-R7 | commit "Stage 6" pushed | https://github.com/Luca1212x5/autoservice-manager/commit/03e9c77b80ff117a641ed27c0f30e6b4ded21417 | commit history |
