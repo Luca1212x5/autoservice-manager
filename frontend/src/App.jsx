@@ -1,39 +1,17 @@
 import { useState, useEffect, useRef } from "react";
 import InterventieList from "./components/InterventieList.jsx";
+import { fetchInterventii } from "./api.js";
 import "./App.css";
 
-// Bază extinsă de intervenții predefinite (18 opțiuni posibile în atelier)
-const POOL_INTERVENTII = [
-  { id: 1, interventie: "Revizie motor B58 3.0L & Schimb ulei Ravenol — BMW M240i (G42)", serviceType: "Mechanics" },
-  { id: 2, interventie: "Montaj lip față M-Sport cu adeziv poliuretanic — BMW Seria 3 (G20)", serviceType: "Bodywork" },
-  { id: 3, interventie: "Diagnoză oficială ISTA+ & Update iDrive — BMW Seria 5 (G30)", serviceType: "Electrical" },
-  { id: 4, interventie: "Schimb distribuție pe lanț N47 & Curățare admisie — BMW 320d (F30)", serviceType: "Mechanics" },
-  { id: 5, interventie: "Sablare etriere frână & Vopsire electrostatică M-Blue — BMW M4", serviceType: "Bodywork" },
-  { id: 6, interventie: "Spălare dinamică cutie automată ZF 8HP — BMW X5 xDrive", serviceType: "Mechanics" },
-  { id: 7, interventie: "Polisare lac Multi-Stage & Protecție Ceramică 9H — BMW M340i", serviceType: "Bodywork" },
-  { id: 8, interventie: "Înregistrare baterie AGM Start-Stop & Verificare alternator — Audi A4", serviceType: "Electrical" },
-  { id: 9, interventie: "Refacere filet bujie chiuloasă (Helicoil) & Test compresie — VW Golf GTI", serviceType: "Mechanics" },
-  { id: 10, interventie: "Reglaj geometrie roți 3D pentru suspensie M-Adaptive — BMW Seria 4", serviceType: "Mechanics" },
-  { id: 11, interventie: "Recondiționare faruri Laserlight & Aplicare folie PPF — BMW X6M", serviceType: "Bodywork" },
-  { id: 12, interventie: "Înlocuire plăcuțe și discuri frână perforate — Mercedes-Benz C-Class", serviceType: "Mechanics" },
-  { id: 13, interventie: "Resoftare modul confort & Codări opțiuni M-Track — BMW M2 (G87)", serviceType: "Electrical" },
-  { id: 14, interventie: "Curățare filtru particule DPF & Senzor presiune — Škoda Octavia", serviceType: "Mechanics" },
-  { id: 15, interventie: "Montaj difuzor spate carbon & Reglaj tips-uri evacuare — BMW 330i", serviceType: "Bodywork" },
-  { id: 16, interventie: "Verificare sistem injecție & Bobine inducție — Porsche Macan", serviceType: "Electrical" },
-  { id: 17, interventie: "Schimb ulei diferențial M-Sport & Verificare cardan — BMW M5", serviceType: "Mechanics" },
-  { id: 18, interventie: "Detailing interior piele Merino & Igienizare ozon — BMW Seria 7", serviceType: "Bodywork" }
-];
-
-// Funcție care extrage aleatoriu între 2 și 15 intervenții diferite la fiecare apel
-function genereazaTabelaAleatoare() {
-  const numarAleator = Math.floor(Math.random() * (15 - 2 + 1)) + 2; // Între 2 și 15
-  const amestecate = [...POOL_INTERVENTII].sort(() => 0.5 - Math.random());
+// Primește array-ul complet de la server și alege aleatoriu între 2 și 15 mașini
+function genereazaTabelaAleatoare(dateDeLaServer) {
+  const numarAleator = Math.floor(Math.random() * (15 - 2 + 1)) + 2;
+  const amestecate = [...dateDeLaServer].sort(() => 0.5 - Math.random());
 
   return amestecate.slice(0, numarAleator).map((item, idx) => ({
     ...item,
-    id: idx + 1,
-    // ~25% șansă ca mașina de pe elevator să fie deja pe final (finalizată)
-    completed: Math.random() < 0.25
+    id: idx + 1, // Resetăm ID-urile vizuale pentru a arăta bine în tabelă
+    completed: Math.random() < 0.25 // ~25% șanse să fie finalizată
   }));
 }
 
@@ -100,36 +78,57 @@ function temaInitiala() {
 }
 
 export default function App() {
-  // Stările obligatorii pentru Etapa 5 (S5-R1, S5-R6) — Inițializat aleatoriu între 2 și 15!
-  const [interventii, setInterventii] = useState(() => genereazaTabelaAleatoare());
+  // Stări pentru aplicație (Etapa 6 + Navigare + Teme)
+  const [interventii, setInterventii] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [tema, setTema] = useState(temaInitiala);
-
-  // Stare pentru Slider-ul din bara de sus
   const [activeSlide, setActiveSlide] = useState("servicii");
   const [filtruServiciu, setFiltruServiciu] = useState("");
 
   // Stare și referință pentru efectul cinematic BMW M3 Competition la scroll
-const [m3Progress, setM3Progress] = useState(0);
-const m3SectionRef = useRef(null);
+  const [m3Progress, setM3Progress] = useState(0);
+  const m3SectionRef = useRef(null);
 
-useEffect(() => {
-  function handleScroll() {
-    if (!m3SectionRef.current) return;
-    const rect = m3SectionRef.current.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
+  // Efectul Etapa 6: Preluăm datele de la server și le randomizăm
+  useEffect(() => {
+    let ignore = false;
+    async function load() {
+      try {
+        const data = await fetchInterventii();
+        if (!ignore) {
+          const dateAmestecate = genereazaTabelaAleatoare(data);
+          setInterventii(dateAmestecate);
+        }
+      } catch (err) {
+        if (!ignore) setError(err.message);
+      } finally {
+        if (!ignore) setLoading(false);
+      }
+    }
+    load();
+    return () => { ignore = true; };
+  }, []);
 
-    // Calculăm progresul (de la 0 când secțiunea intră în ecran, până la 1 când e jos de tot)
-    const distantaIntrata = windowHeight - rect.top;
-    const distantaTotala = windowHeight + rect.height * 0.35;
-    const progres = Math.max(0, Math.min(1, distantaIntrata / distantaTotala));
+  // Efect pentru scroll-ul mașinii
+  useEffect(() => {
+    function handleScroll() {
+      if (!m3SectionRef.current) return;
+      const rect = m3SectionRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
 
-    setM3Progress(progres);
-  }
+      // Calculăm progresul (de la 0 când secțiunea intră în ecran, până la 1 când e jos de tot)
+      const distantaIntrata = windowHeight - rect.top;
+      const distantaTotala = windowHeight + rect.height * 0.35;
+      const progres = Math.max(0, Math.min(1, distantaIntrata / distantaTotala));
 
-  window.addEventListener("scroll", handleScroll, { passive: true });
-  handleScroll();
-  return () => window.removeEventListener("scroll", handleScroll);
-}, [activeSlide]);
+      setM3Progress(progres);
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [activeSlide]); // Se recalculează dacă schimbi slide-ul
 
   // S5-R2 & S5-R5: Actualizare imutabilă cu map
   function handleToggle(id) {
@@ -143,8 +142,6 @@ useEffect(() => {
     setInterventii((prev) => prev.filter((i) => i.id !== id));
   }
 
-
-
   // S5-R6: Comutare temă Light/Dark direct pe documentElement
   function handleTema() {
     const noua = tema === "dark" ? "light" : "dark";
@@ -152,7 +149,7 @@ useEffect(() => {
     document.documentElement.dataset.theme = noua;
   }
 
-  // S5-R4: Contor derivat direct din state (fără useState suplimentar)
+  // S5-R4: Contor derivat direct din state
   const active = interventii.filter((i) => !i.completed).length;
   const totalMasini = interventii.length;
 
@@ -309,7 +306,7 @@ useEffect(() => {
               ))}
             </div>
 
-            {/* TABELA LIVE PENTRU CLIENT CU SEMAFOR DE CAPACITATE (0-5 Verde, 6-10 Portocaliu, 11-15 Roșu) */}
+            {/* TABELA LIVE PENTRU CLIENT CU SEMAFOR DE CAPACITATE */}
             <section className={`panel live-board ${statusAtelier.clasa}-border`}>
               <div className="panel-header-m">
                 <div>
@@ -320,7 +317,7 @@ useEffect(() => {
                 </div>
               </div>
 
-              {/* Widget Semafor: Verde (0-5), Portocaliu (6-10), Roșu (11-15) */}
+              {/* Widget Semafor */}
               <div className={`capacity-banner ${statusAtelier.clasa}`}>
                 <div className="capacity-top">
                   <span className="capacity-badge">{statusAtelier.eticheta}</span>
@@ -353,12 +350,23 @@ useEffect(() => {
                 </div>
               </div>
 
-              {/* Lista de intervenții (Cerința S5-R1, S5-R2, S5-R3) */}
-              <InterventieList
-                interventii={interventii}
-                onToggle={handleToggle}
-                onDelete={handleDelete}
-              />
+              {/* Etapa 6: Mesaje pentru stările de încărcare și eroare */}
+              {loading && <p className="info">📡 Se preiau datele de pe rampele atelierului...</p>}
+              
+              {error && (
+                <p className="error">
+                  Conexiune pierdută: {error}. Te rugăm să rulezi <code>npm run api</code>.
+                </p>
+              )}
+
+              {/* Lista se afișează doar dacă nu se încarcă și nu există erori */}
+              {!loading && !error && (
+                <InterventieList
+                  interventii={interventii}
+                  onToggle={handleToggle}
+                  onDelete={handleDelete}
+                />
+              )}
             </section>
           </div>
         )}
@@ -587,53 +595,52 @@ useEffect(() => {
         )}
       </main>
 
-      
-     {/* SCENA CINEMATICĂ BMW M3 COMPETITION LA SCROLL JOS */}
-    <footer className="m3-dark-tunnel" ref={m3SectionRef}>
-      <div className="m-stripes-top"></div>
+      {/* SCENA CINEMATICĂ BMW M3 COMPETITION LA SCROLL JOS */}
+      <footer className="m3-dark-tunnel" ref={m3SectionRef}>
+        <div className="m-stripes-top"></div>
 
-      <div className="m3-stage">
-        <div
-          className="m3-headlight-glow"
-          style={{
-            opacity: Math.pow(m3Progress, 1.5),
-            transform: `scale(${0.6 + m3Progress * 0.8})`
-          }}
-        ></div>
+        <div className="m3-stage">
+          <div
+            className="m3-headlight-glow"
+            style={{
+              opacity: Math.pow(m3Progress, 1.5),
+              transform: `scale(${0.6 + m3Progress * 0.8})`
+            }}
+          ></div>
 
-        <div
-          className="m3-front-wrapper"
-          style={{
-            // Vine din depărtare (0.55x) până foarte aproape (1.18x) și iese din întuneric
-            transform: `scale(${0.55 + m3Progress * 0.63}) translateY(${(1 - m3Progress) * 60}px)`,
-            opacity: Math.max(0.04, Math.pow(m3Progress, 1.3)),
-            filter: `brightness(${0.1 + m3Progress * 1.05}) contrast(${1 + m3Progress * 0.25})`
-          }}
-        >
-          <img
-            src="/BMW G80 M3 Competition.jpeg"
-            alt="BMW M3 Competition Front View"
-            className="m3-front-img"
-          />
+          <div
+            className="m3-front-wrapper"
+            style={{
+              // Vine din depărtare (0.55x) până foarte aproape (1.18x) și iese din întuneric
+              transform: `scale(${0.55 + m3Progress * 0.63}) translateY(${(1 - m3Progress) * 60}px)`,
+              opacity: Math.max(0.04, Math.pow(m3Progress, 1.3)),
+              filter: `brightness(${0.1 + m3Progress * 2.2}) contrast(${1 + m3Progress * 0.35})`
+            }}
+          >
+            <img
+              src="/BMW G80 M3 Competition.jpeg"
+              alt="BMW M3 Competition Front View"
+              className="m3-front-img"
+            />
+          </div>
+
+          <div
+            className="m3-tunnel-title"
+            style={{
+              opacity: m3Progress > 0.45 ? (m3Progress) * 1.8 : 0,
+              transform: `translateY(${(1 - m3Progress) * 30}px)`
+            }}
+          >
+            <span className="m3-badge-red">BMW M3 COMPETITION</span>
+            <h2>DOMINAȚIE DIN ÎNTUNERIC</h2>
+            <p>510 CP • Motor S58 TwinPower Turbo • Pregătit de emax Motorsport</p>
+          </div>
         </div>
 
-        <div
-          className="m3-tunnel-title"
-          style={{
-            opacity: m3Progress > 0.45 ? (m3Progress) * 1.8 : 0,
-            transform: `translateY(${(1 - m3Progress) * 30}px)`
-          }}
-        >
-          <span className="m3-badge-red">BMW M3 COMPETITION</span>
-          <h2>DOMINAȚIE DIN ÎNTUNERIC</h2>
-          <p>510 CP • Motor S58 TwinPower Turbo • Pregătit de emax Motorsport</p>
-        </div>
-      </div>
-
-      <p className="footer-copy">
-        © 2026 <strong>emax AutoService & Motorsport</strong> — Toate drepturile rezervate.
-      </p>
-    </footer>
+        <p className="footer-copy">
+          © 2026 <strong>emax AutoService & Motorsport</strong> — Toate drepturile rezervate.
+        </p>
+      </footer>
     </div>
   );
 }

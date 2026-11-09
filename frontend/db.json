@@ -1,0 +1,22 @@
+{
+  "interventii": [
+    { "id": 1, "interventie": "Revizie motor B58 3.0L & Schimb ulei Ravenol — BMW M240i (G42)", "serviceType": "Mechanics", "completed": false },
+    { "id": 2, "interventie": "Montaj lip față M-Sport cu adeziv poliuretanic — BMW Seria 3 (G20)", "serviceType": "Bodywork", "completed": false },
+    { "id": 3, "interventie": "Diagnoză oficială ISTA+ & Update iDrive — BMW Seria 5 (G30)", "serviceType": "Electrical", "completed": false },
+    { "id": 4, "interventie": "Schimb distribuție pe lanț N47 & Curățare admisie — BMW 320d (F30)", "serviceType": "Mechanics", "completed": false },
+    { "id": 5, "interventie": "Sablare etriere frână & Vopsire electrostatică M-Blue — BMW M4", "serviceType": "Bodywork", "completed": false },
+    { "id": 6, "interventie": "Spălare dinamică cutie automată ZF 8HP — BMW X5 xDrive", "serviceType": "Mechanics", "completed": false },
+    { "id": 7, "interventie": "Polisare lac Multi-Stage & Protecție Ceramică 9H — BMW M340i", "serviceType": "Bodywork", "completed": false },
+    { "id": 8, "interventie": "Înregistrare baterie AGM Start-Stop & Verificare alternator — Audi A4", "serviceType": "Electrical", "completed": false },
+    { "id": 9, "interventie": "Refacere filet bujie chiuloasă (Helicoil) & Test compresie — VW Golf GTI", "serviceType": "Mechanics", "completed": false },
+    { "id": 10, "interventie": "Reglaj geometrie roți 3D pentru suspensie M-Adaptive — BMW Seria 4", "serviceType": "Mechanics", "completed": false },
+    { "id": 11, "interventie": "Recondiționare faruri Laserlight & Aplicare folie PPF — BMW X6M", "serviceType": "Bodywork", "completed": false },
+    { "id": 12, "interventie": "Înlocuire plăcuțe și discuri frână perforate — Mercedes-Benz C-Class", "serviceType": "Mechanics", "completed": false },
+    { "id": 13, "interventie": "Resoftare modul confort & Codări opțiuni M-Track — BMW M2 (G87)", "serviceType": "Electrical", "completed": false },
+    { "id": 14, "interventie": "Curățare filtru particule DPF & Senzor presiune — Škoda Octavia", "serviceType": "Mechanics", "completed": false },
+    { "id": 15, "interventie": "Montaj difuzor spate carbon & Reglaj tips-uri evacuare — BMW 330i", "serviceType": "Bodywork", "completed": false },
+    { "id": 16, "interventie": "Verificare sistem injecție & Bobine inducție — Porsche Macan", "serviceType": "Electrical", "completed": false },
+    { "id": 17, "interventie": "Schimb ulei diferențial M-Sport & Verificare cardan — BMW M5", "serviceType": "Mechanics", "completed": false },
+    { "id": 18, "interventie": "Detailing interior piele Merino & Igienizare ozon — BMW Seria 7", "serviceType": "Bodywork", "completed": false }
+  ]
+}
