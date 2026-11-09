@@ -20,6 +20,8 @@ cd frontend
 npm install
 npm run dev
 Then open the address printed in the terminal (http://localhost:5173).
+To start the mock API in a second terminal:
+npm run api
 
 ## Status
 - [x] Stage 1: static mockup
@@ -27,7 +29,7 @@ Then open the address printed in the terminal (http://localhost:5173).
 - [x] Stage 3: Vite and React project
 - [x] Stage 4: components rendered from data
 - [x] Stage 5: local state and events
-- [ ] Stage 6: loading data from a mock API
+- [x] Stage 6: data from a mock API
 
 ---
 
@@ -129,3 +131,27 @@ The list lives in React state. Checking and deleting work from the page, and the
 | S5-R6 | light/dark toggle: state + data-theme on html | https://github.com/Luca1212x5/autoservice-manager/blob/576fb2a9959248e0ad2c6be56635ab23d58d6a2f/frontend/src/App.jsx#L28-L32 | click the button, both system themes |
 | S5-R7 | no console warnings; README + AI log | https://github.com/Luca1212x5/autoservice-manager/blob/576fb2a9959248e0ad2c6be56635ab23d58d6a2f/ai-log/etapa-05.md | F12, Console |
 | S5-R8 | commit "Stage 5" pushed | https://github.com/Luca1212x5/autoservice-manager/commit/576fb2a9959248e0ad2c6be56635ab23d58d6a2f | commit history |
+
+---
+
+## Stage 6: data from a mock API
+
+**Description:**
+The application's data is now served by a mock REST API using `json-server`. The React app fetches this data on load using `useEffect` and `fetch`. It handles and displays three states: loading, success (rendering the list), and error (network failure). 
+
+**AI Usage:**
+- **Tool:** Gemini
+- **Used for:** Structuring `db.json`, setting up the `api.js` fetch logic with `.env` variables, modifying React `useEffect` for async data loading, handling race conditions with the cleanup function, and adding loading/error UI styling.
+- **AI Log:** See [`ai-log/etapa-06.md`](ai-log/etapa-06.md)
+
+### Stage 6 Checklist
+
+| ID | Requirement | Where (permalink) | How to check |
+| --- | --- | --- | --- |
+| S6-R1 | npm run api starts, route shows JSON | https://github.com/Luca1212x5/autoservice-manager/blob/03e9c77b80ff117a641ed27c0f30e6b4ded21417/frontend/package.json | open localhost:3001/interventii |
+| S6-R2 | data no longer in React code | https://github.com/Luca1212x5/autoservice-manager/blob/03e9c77b80ff117a641ed27c0f30e6b4ded21417/frontend/db.json | read |
+| S6-R3 | loading message while waiting | https://github.com/Luca1212x5/autoservice-manager/blob/03e9c77b80ff117a641ed27c0f30e6b4ded21417/frontend/src/App.jsx | --delay 4000 |
+| S6-R4 | error message when API is down | https://github.com/Luca1212x5/autoservice-manager/blob/03e9c77b80ff117a641ed27c0f30e6b4ded21417/frontend/src/App.jsx | stop npm run api, refresh |
+| S6-R5 | fetch only in api.js, URL from env | https://github.com/Luca1212x5/autoservice-manager/blob/03e9c77b80ff117a641ed27c0f30e6b4ded21417/frontend/src/api.js | search for fetch |
+| S6-R6 | README Stage 6 section + AI log | https://github.com/Luca1212x5/autoservice-manager/blob/03e9c77b80ff117a641ed27c0f30e6b4ded21417/ai-log/etapa-06.md | read |
+| S6-R7 | commit "Stage 6" pushed | https://github.com/Luca1212x5/autoservice-manager/commit/03e9c77b80ff117a641ed27c0f30e6b4ded21417 | commit history |
