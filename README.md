@@ -30,6 +30,7 @@ npm run api
 - [x] Stage 4: components rendered from data
 - [x] Stage 5: local state and events
 - [x] Stage 6: data from a mock API
+- [x] Stage 7: form and validation
 
 ---
 
@@ -155,3 +156,28 @@ The application's data is now served by a mock REST API using `json-server`. The
 | S6-R5 | fetch only in api.js, URL from env | https://github.com/Luca1212x5/autoservice-manager/blob/03e9c77b80ff117a641ed27c0f30e6b4ded21417/frontend/src/api.js#L3-L9 | search for fetch |
 | S6-R6 | README Stage 6 section + AI log | https://github.com/Luca1212x5/autoservice-manager/blob/15c2e7384fa5439cfd0efca95921359dfda6ec3f/ai-log/etapa-06.md?plain=1 | read |
 | S6-R7 | commit "Stage 6" pushed | https://github.com/Luca1212x5/autoservice-manager/commit/03e9c77b80ff117a641ed27c0f30e6b4ded21417 | commit history |
+
+---
+
+## Stage 7: form and validation
+
+**Description:**
+Interventions can be added directly from the page using a controlled form (`TaskForm`). The form validates user input (non-empty text, max 100 chars), displays inline error messages, and prevents double submissions. All CRUD operations (create via `POST`, toggle via `PATCH`, delete via `DELETE`) are synchronized with the mock API before updating the UI state, ensuring changes persist across page refreshes. Includes `tw.json` and `data-testid` attributes for automated grading.
+
+**AI Usage:**
+- **Tool:** Gemini
+- **Used for:** Refactoring `api.js` with a shared `request` helper for full CRUD operations, creating the controlled `TaskForm.jsx` component with validation, integrating the inline form into the existing multi-slide layout, and configuring `tw.json` and `data-testid` attributes for automated verification.
+- **AI Log:** See [`ai-log/etapa-07.md`](ai-log/etapa-07.md)
+
+### Stage 7 Checklist
+
+| ID | Requirement | Where (permalink) | How to check |
+| --- | --- | --- | --- |
+| S7-R1 | controlled form: value + onChange on every field | https://github.com/Luca1212x5/autoservice-manager/blob/72c86f9215f48ba9890e165b9f51602d071dc89f/frontend/src/components/TaskForm.jsx#L47-L69 | read |
+| S7-R2 | empty title shows an error, nothing is sent | https://github.com/Luca1212x5/autoservice-manager/blob/72c86f9215f48ba9890e165b9f51602d071dc89f/frontend/src/components/TaskForm.jsx#L17-L22 | submit empty, watch Network |
+| S7-R3 | added item shows in the list and survives refresh | https://github.com/Luca1212x5/autoservice-manager/blob/72c86f9215f48ba9890e165b9f51602d071dc89f/frontend/src/App.jsx#L112-L115 | add, refresh |
+| S7-R4 | toggle and delete survive refresh | https://github.com/Luca1212x5/autoservice-manager/blob/72c86f9215f48ba9890e165b9f51602d071dc89f/frontend/src/App.jsx#L118-L136 | toggle/delete, refresh |
+| S7-R5 | button disabled while sending, form cleared only on success | https://github.com/Luca1212x5/autoservice-manager/blob/72c86f9215f48ba9890e165b9f51602d071dc89f/frontend/src/components/TaskForm.jsx#L33-L42 | --delay 3000; stop API and submit |
+| S7-R6 | tw.json and the data-testid attributes from table 7.3 | https://github.com/Luca1212x5/autoservice-manager/blob/72c86f9215f48ba9890e165b9f51602d071dc89f/tw.json | querySelectorAll in the console |
+| S7-R7 | README Stage 7 section + AI log | https://github.com/Luca1212x5/autoservice-manager/blob/72c86f9215f48ba9890e165b9f51602d071dc89f/ai-log/etapa-07.md?plain=1 | read |
+| S7-R8 | commit "Stage 7" pushed | https://github.com/Luca1212x5/autoservice-manager/commit/72c86f9215f48ba9890e165b9f51602d071dc89f | commit history |
