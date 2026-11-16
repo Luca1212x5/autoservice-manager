@@ -1,31 +1,30 @@
-const ETICHETE_SERVICIU = { 
-  Mechanics: "Mecanică", 
-  Electrical: "Electrică", 
-  Bodywork: "Caroserie" 
-};
-
-export default function InterventieCard({ item, onToggle, onDelete }) {
+export default function InterventieCard({ interventie, onToggle, onDelete }) {
   return (
-    <li className={item.completed ? "task-card done" : "task-card"}>
+    <li
+      className={interventie.completed ? "task-card done" : "task-card"}
+      data-testid="item"
+      data-id={interventie.id}
+    >
       <label className="task-main">
-        <input 
-          type="checkbox" 
-          checked={item.completed} 
-          onChange={() => onToggle(item.id)} 
+        <input
+          type="checkbox"
+          checked={interventie.completed}
+          onChange={() => onToggle(interventie.id)}
+          data-testid="item-toggle"
         />
         <div>
-          <h3>{item.interventie}</h3>
-          <span className={`badge badge-${item.serviceType.toLowerCase()}`}>
-            {ETICHETE_SERVICIU[item.serviceType] || item.serviceType}
+          <h3 data-testid="item-title">{interventie.interventie}</h3>
+          <span className={`badge badge-${interventie.serviceType.toLowerCase()}`}>
+            {interventie.serviceType}
           </span>
         </div>
       </label>
       <button 
         className="btn-danger" 
-        onClick={() => onDelete(item.id)} 
-        aria-label={`Șterge ${item.interventie}`}
+        onClick={() => onDelete(interventie.id)}
+        data-testid="item-delete"
       >
-        Șterge
+        Finalizează / Șterge
       </button>
     </li>
   );

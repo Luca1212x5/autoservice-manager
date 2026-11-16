@@ -1,19 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import InterventieList from "./components/InterventieList.jsx";
-import { fetchInterventii } from "./api.js";
+import TaskForm from "./components/TaskForm.jsx";
+import { fetchInterventii, createInterventie, updateInterventie, deleteInterventie } from "./api.js";
 import "./App.css";
-
-// Primește array-ul complet de la server și alege aleatoriu între 2 și 15 mașini
-function genereazaTabelaAleatoare(dateDeLaServer) {
-  const numarAleator = Math.floor(Math.random() * (15 - 2 + 1)) + 2;
-  const amestecate = [...dateDeLaServer].sort(() => 0.5 - Math.random());
-
-  return amestecate.slice(0, numarAleator).map((item, idx) => ({
-    ...item,
-    id: idx + 1, // Resetăm ID-urile vizuale pentru a arăta bine în tabelă
-    completed: Math.random() < 0.25 // ~25% șanse să fie finalizată
-  }));
-}
 
 // Date detaliate pentru secțiunea "Servicii auto"
 const CATALOG_SERVICII = [
@@ -78,7 +67,7 @@ function temaInitiala() {
 }
 
 export default function App() {
-  // Stări pentru aplicație (Etapa 6 + Navigare + Teme)
+  // Stări pentru aplicație
   const [interventii, setInterventii] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -90,15 +79,14 @@ export default function App() {
   const [m3Progress, setM3Progress] = useState(0);
   const m3SectionRef = useRef(null);
 
-  // Efectul Etapa 6: Preluăm datele de la server și le randomizăm
+  // Efectul Etapa 7: Preluăm datele reale de la server (fără randomizare pentru corectură)
   useEffect(() => {
     let ignore = false;
     async function load() {
       try {
         const data = await fetchInterventii();
         if (!ignore) {
-          const dateAmestecate = genereazaTabelaAleatoare(data);
-          setInterventii(dateAmestecate);
+          setInterventii(data);
         }
       } catch (err) {
         if (!ignore) setError(err.message);
@@ -117,7 +105,6 @@ export default function App() {
       const rect = m3SectionRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
 
-      // Calculăm progresul (de la 0 când secțiunea intră în ecran, până la 1 când e jos de tot)
       const distantaIntrata = windowHeight - rect.top;
       const distantaTotala = windowHeight + rect.height * 0.35;
       const progres = Math.max(0, Math.min(1, distantaIntrata / distantaTotala));
@@ -128,45 +115,60 @@ export default function App() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [activeSlide]); // Se recalculează dacă schimbi slide-ul
+  }, [activeSlide]); 
 
-  // S5-R2 & S5-R5: Actualizare imutabilă cu map
-  function handleToggle(id) {
-    setInterventii((prev) =>
-      prev.map((i) => (i.id === id ? { ...i, completed: !i.completed } : i))
-    );
+  // Funcție Etapa 7: Adăugare prin server
+  async function handleAdd(interventieNoua) {
+    const creat = await createInterventie(interventieNoua);
+    setInterventii((prev) => [...prev, creat]);
   }
 
-  // S5-R3 & S5-R5: Ștergere imutabilă cu filter
-  function handleDelete(id) {
-    setInterventii((prev) => prev.filter((i) => i.id !== id));
+  // Funcție Etapa 7: Bifare direct pe server
+  async function handleToggle(id) {
+    const item = interventii.find((i) => i.id === id);
+    try {
+      const actualizat = await updateInterventie(id, { completed: !item.completed });
+      setInterventii((prev) => prev.map((i) => (i.id === id ? actualizat : i)));
+    } catch (err) {
+      setError(err.message);
+    }
   }
 
-  // S5-R6: Comutare temă Light/Dark direct pe documentElement
+  // Funcție Etapa 7: Ștergere direct pe server
+  async function handleDelete(id) {
+    try {
+      await deleteInterventie(id);
+      setInterventii((prev) => prev.filter((i) => i.id !== id));
+    } catch (err) {
+      setError(err.message);
+    }
+  }
+
+  // Comutare temă Light/Dark
   function handleTema() {
     const noua = tema === "dark" ? "light" : "dark";
     setTema(noua);
     document.documentElement.dataset.theme = noua;
   }
 
-  // S5-R4: Contor derivat direct din state
   const active = interventii.filter((i) => !i.completed).length;
   const totalMasini = interventii.length;
 
-  // Calculul stării atelierului (Verde: 0-5 | Portocaliu: 6-10 | Roșu: 11-15)
+  // Calculul stării atelierului (Capacitate maximă 25)
+  const MAX_RAMPE = 25;
   let statusAtelier = {
     clasa: "status-green",
     eticheta: "🟢 LIBER",
     mesajClient: "Moment excelent pentru vizită! Avem elevatoare libere pentru preluare rapidă fără așteptare."
   };
 
-  if (totalMasini >= 6 && totalMasini <= 10) {
+  if (totalMasini >= 10 && totalMasini <= 18) {
     statusAtelier = {
       clasa: "status-orange",
       eticheta: "🟠 Disponibil",
       mesajClient: "Atelierul lucrează în regim normal. Timp estimat de preluare pentru clienți noi: ~35-50 minute."
     };
-  } else if (totalMasini >= 11) {
+  } else if (totalMasini > 18) {
     statusAtelier = {
       clasa: "status-red",
       eticheta: "🔴 Aglomerat",
@@ -174,16 +176,15 @@ export default function App() {
     };
   }
 
-  const procentOcupare = Math.min(100, Math.round((totalMasini / 15) * 100));
+  const procentOcupare = Math.min(100, Math.round((totalMasini / MAX_RAMPE) * 100));
 
   return (
     <div className="emax-app">
-      {/* BARA DE SUS: Stânga Logo emax | Mijloc Slider Opțiuni | Dreapta Buton Temă */}
+      {/* BARA DE SUS */}
       <header className="app-header">
         <div className="m-stripes-top"></div>
 
         <div className="navbar-top">
-          {/* Stânga Sus: Brandul emax cu dungile M */}
           <div className="brand-logo" onClick={() => setActiveSlide("servicii")}>
             <div className="m-bars">
               <span className="m-bar blue-light"></span>
@@ -194,7 +195,6 @@ export default function App() {
             <span className="brand-sub">BMW SPECIALIST & MULTIBRAND</span>
           </div>
 
-          {/* Mijloc Sus: Slider interactiv cu cele 4 opțiuni */}
           <nav className="nav-slider" aria-label="Meniu principal service">
             <button
               className={`slide-tab ${activeSlide === "servicii" ? "active" : ""}`}
@@ -222,7 +222,6 @@ export default function App() {
             </button>
           </nav>
 
-          {/* Dreapta Sus: Buton Mod Luminos / Întunecat (Cerința S5-R6) */}
           <button
             className="theme-toggle"
             onClick={handleTema}
@@ -232,7 +231,7 @@ export default function App() {
           </button>
         </div>
 
-        {/* Hero Banner cu informațiile și contorul obligatoriu S5-R4 */}
+        {/* Hero Banner */}
         <div className="hero-banner">
           <div className="hero-text">
             <span className="m-badge">PRECISION GERMAN ENGINEERING</span>
@@ -247,7 +246,7 @@ export default function App() {
                 {interventii.length} interventions, {active} active
               </p>
               <span className={`live-pill ${statusAtelier.clasa}`}>
-                Capacitate: {totalMasini}/15 elevatoare
+                Capacitate: {totalMasini}/{MAX_RAMPE} elevatoare
               </span>
             </div>
           </div>
@@ -306,66 +305,54 @@ export default function App() {
               ))}
             </div>
 
-            {/* TABELA LIVE PENTRU CLIENT CU SEMAFOR DE CAPACITATE */}
-            <section className={`panel live-board ${statusAtelier.clasa}-border`}>
+            {/* ZONA UNIFICATĂ: SEMAFOR -> FORMULAR -> TABELĂ LIVE */}
+            <section className={`panel live-board ${statusAtelier.clasa}-border`} style={{ marginTop: '40px' }}>
+              
               <div className="panel-header-m">
                 <div>
-                  <h2>📡 Monitorizare Live Atelier: Grad de Ocupare & Elevatoare</h2>
+                  <h2>📡 Monitorizare Live Atelier & Recepție</h2>
                   <p className="panel-sub">
-                    Tabelă informativă pentru clienți — vezi în timp real câte mașini sunt în lucru înainte să vii la service.
+                    Vezi în timp real mașinile aflate în lucru și deschide o fișă nouă de intervenție.
                   </p>
                 </div>
               </div>
 
-              {/* Widget Semafor */}
-              <div className={`capacity-banner ${statusAtelier.clasa}`}>
+              <div className={`capacity-banner ${statusAtelier.clasa}`} style={{ marginBottom: '30px' }}>
                 <div className="capacity-top">
                   <span className="capacity-badge">{statusAtelier.eticheta}</span>
                   <span className="capacity-numbers">
-                    <strong>{totalMasini}</strong> din <strong>15</strong> rampe ocupate ({15 - totalMasini} locuri libere)
+                    <strong>{totalMasini}</strong> din <strong>{MAX_RAMPE}</strong> rampe ocupate ({Math.max(0, MAX_RAMPE - totalMasini)} locuri libere)
                   </span>
                 </div>
-
-                {/* Bara de progres dinamică */}
                 <div className="capacity-bar-track">
-                  <div
-                    className="capacity-bar-fill"
-                    style={{ width: `${procentOcupare}%` }}
-                  ></div>
+                  <div className="capacity-bar-fill" style={{ width: `${procentOcupare}%` }}></div>
                 </div>
-
                 <p className="capacity-advice">{statusAtelier.mesajClient}</p>
-
-                {/* Legendă clară pe intervale */}
-                <div className="capacity-legend">
-                  <span className={totalMasini <= 5 ? "active-zone" : ""}>
-                    🟢 0–5: Liber
-                  </span>
-                  <span className={totalMasini >= 6 && totalMasini <= 10 ? "active-zone" : ""}>
-                    🟠 6–10: Disponibil
-                  </span>
-                  <span className={totalMasini >= 11 ? "active-zone" : ""}>
-                    🔴 11–15: Aglomerat
-                  </span>
-                </div>
               </div>
 
-              {/* Etapa 6: Mesaje pentru stările de încărcare și eroare */}
-              {loading && <p className="info">📡 Se preiau datele de pe rampele atelierului...</p>}
+              {/* FORMULARUL EMAX INLINE */}
+              <div className="form-section-wrapper">
+                <h3 className="form-section-title">➕ Adaugă o intervenție nouă</h3>
+                <TaskForm onAdd={handleAdd} />
+              </div>
+
+              {/* MESAJE ȘI TABELA LIVE */}
+              {loading && <p className="info" data-testid="loading">📡 Se preiau datele de pe rampele atelierului...</p>}
               
               {error && (
-                <p className="error">
+                <p className="error" data-testid="error">
                   Conexiune pierdută: {error}. Te rugăm să rulezi <code>npm run api</code>.
                 </p>
               )}
 
-              {/* Lista se afișează doar dacă nu se încarcă și nu există erori */}
               {!loading && !error && (
-                <InterventieList
-                  interventii={interventii}
-                  onToggle={handleToggle}
-                  onDelete={handleDelete}
-                />
+                <div style={{ marginTop: '30px' }}>
+                  <InterventieList
+                    interventii={interventii}
+                    onToggle={handleToggle}
+                    onDelete={handleDelete}
+                  />
+                </div>
               )}
             </section>
           </div>
@@ -611,7 +598,6 @@ export default function App() {
           <div
             className="m3-front-wrapper"
             style={{
-              // Vine din depărtare (0.55x) până foarte aproape (1.18x) și iese din întuneric
               transform: `scale(${0.55 + m3Progress * 0.63}) translateY(${(1 - m3Progress) * 60}px)`,
               opacity: Math.max(0.04, Math.pow(m3Progress, 1.3)),
               filter: `brightness(${0.1 + m3Progress * 2.2}) contrast(${1 + m3Progress * 0.35})`

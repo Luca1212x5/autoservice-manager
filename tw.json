@@ -1,0 +1,6 @@
+{
+  "resource": "interventii",
+  "title": "interventie",
+  "done": "completed",
+  "sample": { "serviceType": "Bodywork" }
+}

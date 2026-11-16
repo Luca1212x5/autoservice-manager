@@ -1007,3 +1007,92 @@ body {
 .live-board .card.done h3 {
   text-decoration: none;
 }
+/* ================= FORMULAR EMAX INLINE ================= */
+.form-section-wrapper {
+  background-color: var(--bg-card);
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 20px;
+}
+
+.form-section-title {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  color: var(--text-main);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 10px;
+}
+
+.emax-inline-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.emax-form-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.emax-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 200px;
+}
+
+.emax-form-group span {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-main);
+}
+
+.emax-inline-form input,
+.emax-inline-form select {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background-color: #222;
+  color: white;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.emax-inline-form input[aria-invalid="true"] {
+  border-color: var(--cap-red);
+  background-color: rgba(255, 59, 48, 0.05);
+}
+
+.btn-add-emax {
+  background-color: var(--m-blue-dark);
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  height: 45px;
+  white-space: nowrap;
+}
+
+.btn-add-emax:hover:not(:disabled) {
+  background-color: var(--m-blue-light);
+}
+
+.btn-add-emax:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: #555;
+}
+
+.form-error-msg {
+  margin: 5px 0 0 0;
+  font-size: 0.9rem;
+}
