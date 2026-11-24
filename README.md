@@ -16,12 +16,11 @@ A simple web application to manage car repairs and service interventions for mec
 3. Paint front bumper BMW, active, Bodywork
 
 ## How to run
-cd frontend
-npm install
-npm run dev
-Then open the address printed in the terminal (http://localhost:5173).
-To start the mock API in a second terminal:
-npm run api
+```bash
+cd backend && npm install && npm run dev    # terminal 1, port 3001
+cd frontend && npm install && npm run dev   # terminal 2, port 5173
+```
+Then open `http://localhost:5173` in your browser.
 
 ## Status
 - [x] Stage 1: static mockup
@@ -32,6 +31,7 @@ npm run api
 - [x] Stage 6: data from a mock API
 - [x] Stage 7: form and validation
 - [x] Stage 8: routing and detail page
+- [x] Stage 9: own backend with Express
 
 ---
 
@@ -139,7 +139,7 @@ The list lives in React state. Checking and deleting work from the page, and the
 ## Stage 6: data from a mock API
 
 **Description:**
-The application's data is now served by a mock REST API using `json-server`. The React app fetches this data on load using `useEffect` and `fetch`. It handles and displays three states: loading, success (rendering the list), and error (network failure). 
+The application's data is now served by a mock REST API using `json-server`. The React app fetches this data on load using `useEffect` and `fetch`. It handles and displays three states: loading, success (rendering the list), and error (network failure).
 
 **AI Usage:**
 - **Tool:** Gemini
@@ -207,3 +207,27 @@ Three main pages behind React Router: the list and service catalog (`/`), a deta
 | S8-R6 | data-testid attributes from tables 7.3 and 8.2; detail route /<resource>/:id | https://github.com/Luca1212x5/autoservice-manager/blob/50c8210251bf404aaa330fc4db505b33b622ab50/frontend/src/pages/InterventieDetaliuPage.jsx#L59-L65 | querySelector in the console |
 | S8-R7 | README Stage 8 section + AI log | https://github.com/Luca1212x5/autoservice-manager/blob/50c8210251bf404aaa330fc4db505b33b622ab50/ai-log/etapa-08.md?plain=1 | read |
 | S8-R8 | commit "Stage 8" pushed | https://github.com/Luca1212x5/autoservice-manager/commit/50c8210251bf404aaa330fc4db505b33b622ab50 | commit history |
+
+---
+
+## Stage 9: own backend with Express
+
+**Description:**
+`json-server` is gone. The API is now a custom Node.js + Express server in `backend/`, featuring full REST routes (`/interventii`), server-side validation with a field whitelist, proper HTTP status codes (`200`, `201`, `204`, `400`, `404`), centralized error handling, and CORS configuration. Data is kept in memory and resets on server restart (to be migrated to MariaDB in Stage 10).
+
+**AI Usage:**
+- **Tool:** Gemini
+- **Used for:** Building the Express backend structure (`app.js`, `server.js`, `routes/interventii.js`, `validation.js`), configuring CORS and server-side validation, updating `frontend/src/api.js` to read `body.error`, and removing `json-server` and `db.json`.
+- **AI Log:** See [`ai-log/etapa-09.md`](ai-log/etapa-09.md)
+
+### Stage 9 Checklist
+
+| ID | Requirement | Where (permalink) | How to check |
+| --- | --- | --- | --- |
+| S9-R1 | npm run dev in backend/ starts the API on 3001 | https://github.com/Luca1212x5/autoservice-manager/blob/a3668823e6cb792580f64f5fb970195dd183348b/backend/src/server.js#L1-L7 | run it, open /health |
+| S9-R2 | all five routes answer with the right codes | https://github.com/Luca1212x5/autoservice-manager/blob/a3668823e6cb792580f64f5fb970195dd183348b/backend/src/routes/interventii.js#L69-L115 | curl commands from README |
+| S9-R3 | invalid data returns 400 with a clear message | https://github.com/Luca1212x5/autoservice-manager/blob/a3668823e6cb792580f64f5fb970195dd183348b/backend/src/validation.js#L5-L38 | POST with empty title |
+| S9-R4 | React app works with json-server removed | https://github.com/Luca1212x5/autoservice-manager/blob/a3668823e6cb792580f64f5fb970195dd183348b/frontend/src/api.js#L12-L16 | stop everything but backend |
+| S9-R5 | no CORS errors in the browser console | https://github.com/Luca1212x5/autoservice-manager/blob/a3668823e6cb792580f64f5fb970195dd183348b/backend/src/app.js#L7 | open console |
+| S9-R6 | README Stage 9 section + AI log | https://github.com/Luca1212x5/autoservice-manager/blob/a3668823e6cb792580f64f5fb970195dd183348b/ai-log/etapa-09.md?plain=1 | read |
+| S9-R7 | commit "Stage 9" pushed | https://github.com/Luca1212x5/autoservice-manager/commit/a3668823e6cb792580f64f5fb970195dd183348b | commit history |
