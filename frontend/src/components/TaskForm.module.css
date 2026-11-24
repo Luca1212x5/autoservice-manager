@@ -1,0 +1,47 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.row {
+  display: flex;
+  align-items: flex-end;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 200px;
+}
+
+.group span {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.form input,
+.form select {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background-color: var(--bg);
+  color: var(--text);
+  font-size: 1rem;
+  width: 100%;
+}
+
+.form input[aria-invalid="true"] {
+  border-color: var(--cap-red);
+  background-color: rgba(239, 68, 68, 0.08);
+}
+
+.errorMsg {
+  margin: 5px 0 0 0;
+  font-size: 0.9rem;
+}

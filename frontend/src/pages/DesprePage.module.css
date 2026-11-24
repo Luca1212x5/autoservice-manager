@@ -1,0 +1,299 @@
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  animation: slideEnter 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideEnter {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.sectionHeader {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 28px;
+}
+
+.sectionHeader h2 {
+  font-size: 1.85rem;
+  margin: 0 0 8px 0;
+  color: var(--m-light-blue);
+}
+
+.sectionHeader p {
+  color: var(--muted);
+  margin: 0;
+}
+
+/* POVESTEA EMAX & TIMELINE */
+.aboutHeroCard {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 28px;
+  background: var(--card);
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  margin-bottom: 28px;
+  align-items: center;
+}
+
+@media (max-width: 850px) {
+  .aboutHeroCard {
+    grid-template-columns: 1fr;
+  }
+}
+
+.aboutHeroCard img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.techStack {
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: var(--bg);
+  border-left: 4px solid var(--m-light-blue);
+  border-radius: 8px;
+  font-size: 0.92rem;
+}
+
+.timelineGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+.timelineItem {
+  background: var(--card);
+  padding: 20px;
+  border-radius: 12px;
+  border-top: 4px solid var(--m-light-blue);
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: transform 0.25s ease;
+}
+
+.timelineItem:hover {
+  transform: translateY(-5px);
+  border-top-color: var(--m-red);
+}
+
+.year {
+  font-size: 0.78rem;
+  font-weight: 900;
+  color: var(--m-red);
+}
+
+.timelineItem h4 {
+  margin: 8px 0;
+}
+
+.timelineItem p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* POLISARE & DETAILING */
+.polishShowcase {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 28px;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+@media (max-width: 850px) {
+  .polishShowcase {
+    grid-template-columns: 1fr;
+  }
+}
+
+.polishImageBox {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 2px solid var(--m-light-blue);
+}
+
+.polishImageBox img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  display: block;
+}
+
+.shineOverlay {
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: skewX(-25deg);
+  animation: polishSweep 3.5s infinite;
+}
+
+@keyframes polishSweep {
+  0% { left: -120%; }
+  60%, 100% { left: 160%; }
+}
+
+.badgeGarantie {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  background: var(--m-red);
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-weight: 800;
+  font-size: 0.85rem;
+}
+
+.polishSteps {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.stepBox {
+  display: flex;
+  gap: 16px;
+  background: var(--card);
+  padding: 18px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  transition: transform 0.25s ease;
+}
+
+.stepBox:hover {
+  transform: translateX(8px);
+  border-color: var(--m-light-blue);
+}
+
+.stepNum {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--m-light-blue);
+}
+
+.stepBox h4 {
+  margin: 0 0 6px 0;
+}
+
+.stepBox p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.reviewsBox {
+  background: var(--card);
+  padding: 24px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+}
+
+.reviewsBox h3 {
+  margin-top: 0;
+}
+
+.reviewsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+  margin-top: 14px;
+}
+
+.reviewCard {
+  background: var(--bg);
+  padding: 18px;
+  border-radius: 10px;
+  border-left: 4px solid var(--m-red);
+}
+
+.reviewCard p {
+  margin: 0 0 10px 0;
+  font-style: italic;
+}
+
+.reviewCard span {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--m-light-blue);
+}
+
+/* TRACTĂRI 24/7 */
+.towingBanner {
+  background: linear-gradient(135deg, var(--m-dark-blue), #162a45);
+  color: #ffffff;
+  padding: 32px;
+  border-radius: 16px;
+  border-left: 6px solid var(--m-red);
+  margin-bottom: 28px;
+}
+
+.emergencyTag {
+  background: var(--m-red);
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.towingStats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.towingStats div {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.towingStats strong {
+  display: block;
+  font-size: 1.6rem;
+  color: #38bdf8;
+}
+
+.towingCardsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.towingCard {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--m-light-blue);
+  border-radius: 14px;
+  padding: 22px;
+  transition: transform 0.3s ease;
+}
+
+.towingCard:hover {
+  transform: translateY(-5px);
+  border-top-color: var(--m-red);
+}
+
+.towingCard h3 {
+  margin-top: 0;
+}
+
+.towingCard p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}

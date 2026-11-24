@@ -1,30 +1,43 @@
+import { Link } from "react-router-dom";
+import { ETICHETE_SERVICII } from "../constants.js";
+import styles from "./InterventieCard.module.css";
+
 export default function InterventieCard({ interventie, onToggle, onDelete }) {
   return (
     <li
-      className={interventie.completed ? "task-card done" : "task-card"}
+      className={interventie.completed ? `${styles.card} ${styles.done}` : styles.card}
       data-testid="item"
       data-id={interventie.id}
     >
-      <label className="task-main">
+      <div className={styles.main}>
         <input
           type="checkbox"
           checked={interventie.completed}
           onChange={() => onToggle(interventie.id)}
+          aria-label={`Marchează ${interventie.interventie}`}
           data-testid="item-toggle"
         />
         <div>
-          <h3 data-testid="item-title">{interventie.interventie}</h3>
+          <Link
+            to={`/interventii/${interventie.id}`}
+            className={styles.title}
+            data-testid="item-link"
+          >
+            {interventie.interventie}
+          </Link>
           <span className={`badge badge-${interventie.serviceType.toLowerCase()}`}>
-            {interventie.serviceType}
+            {ETICHETE_SERVICII[interventie.serviceType] ?? interventie.serviceType}
           </span>
         </div>
-      </label>
-      <button 
-        className="btn-danger" 
+      </div>
+
+      <button
+        className="btn-danger"
         onClick={() => onDelete(interventie.id)}
+        aria-label={`Șterge ${interventie.interventie}`}
         data-testid="item-delete"
       >
-        Finalizează / Șterge
+        Șterge
       </button>
     </li>
   );

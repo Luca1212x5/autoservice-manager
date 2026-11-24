@@ -1,0 +1,229 @@
+.mStripesTop {
+  height: 6px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--m-light-blue) 0%,
+    var(--m-light-blue) 33.3%,
+    var(--m-dark-blue) 33.3%,
+    var(--m-dark-blue) 66.6%,
+    var(--m-red) 66.6%,
+    var(--m-red) 100%
+  );
+  animation: mStripePulse 6s infinite alternate ease-in-out;
+}
+
+@keyframes mStripePulse {
+  0% { filter: brightness(1); }
+  100% { filter: brightness(1.35); }
+}
+
+.header {
+  background: var(--header-bg);
+  color: #ffffff;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.navbarTop {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.brandLogo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  user-select: none;
+  transition: transform 0.25s ease;
+}
+
+.brandLogo:hover {
+  transform: scale(1.04);
+}
+
+.mBars {
+  display: flex;
+  gap: 3px;
+  transform: skewX(-18deg);
+}
+
+.mBar {
+  width: 7px;
+  height: 28px;
+  display: inline-block;
+  border-radius: 1px;
+}
+
+.blueLight { background: var(--m-light-blue); }
+.blueDark { background: #1d4ed8; }
+.red { background: var(--m-red); }
+
+.brandText {
+  font-size: 1.9rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: lowercase;
+  background: linear-gradient(90deg, #ffffff, #93c5fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brandSub {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #93c5fd;
+  border-left: 2px solid var(--m-red);
+  padding-left: 8px;
+  max-width: 110px;
+  line-height: 1.1;
+}
+
+.nav {
+  display: flex;
+  background: rgba(255, 255, 255, 0.07);
+  padding: 6px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.link {
+  color: #e2e8f0;
+  text-decoration: none;
+  padding: 9px 18px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  transition: all 0.3s ease;
+}
+
+.link:hover {
+  color: #ffffff;
+  background: rgba(0, 102, 177, 0.35);
+}
+
+.active {
+  background: linear-gradient(135deg, var(--m-light-blue) 0%, var(--m-red) 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(224, 30, 55, 0.45);
+}
+
+.themeToggle {
+  padding: 10px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  background: rgba(11, 25, 44, 0.6);
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.themeToggle:hover {
+  background: var(--m-light-blue);
+  border-color: #ffffff;
+}
+
+.main {
+  max-width: 1200px;
+  margin: 36px auto;
+  padding: 0 20px;
+  min-height: 45vh;
+}
+
+/* SCENA CINEMATICĂ BMW M3 COMPETITION */
+.m3DarkTunnel {
+  background: #000000;
+  color: #ffffff;
+  margin-top: 70px;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 30px;
+}
+
+.m3Stage {
+  min-height: 75vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 60px 20px;
+  background: radial-gradient(circle at center, rgba(0, 102, 177, 0.14) 0%, #000000 72%);
+}
+
+.m3HeadlightGlow {
+  position: absolute;
+  width: 650px;
+  height: 300px;
+  background: radial-gradient(ellipse at center, rgba(0, 102, 177, 0.55) 0%, rgba(224, 30, 55, 0.25) 45%, transparent 75%);
+  filter: blur(45px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.m3FrontWrapper {
+  position: relative;
+  z-index: 2;
+  max-width: 960px;
+  width: 100%;
+  will-change: transform, opacity, filter;
+}
+
+.m3FrontImg {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: 0 0 90px 30px #000000 inset, 0 20px 60px rgba(0, 0, 0, 0.95);
+  display: block;
+}
+
+.m3TunnelTitle {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  margin-top: 28px;
+  pointer-events: none;
+}
+
+.m3BadgeRed {
+  background: var(--m-red);
+  color: #ffffff;
+  padding: 5px 14px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.m3TunnelTitle h2 {
+  margin: 12px 0 6px;
+  font-size: 2.1rem;
+  letter-spacing: 2px;
+}
+
+.m3TunnelTitle p {
+  margin: 0;
+  color: #93c5fd;
+  font-weight: 600;
+}
+
+.footerCopy {
+  text-align: center;
+  margin: 12px 0 0 0;
+  color: #94a3b8;
+  font-size: 0.9rem;
+}

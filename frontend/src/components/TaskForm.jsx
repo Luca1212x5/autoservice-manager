@@ -1,10 +1,6 @@
 import { useState } from "react";
-
-const TIPURI_SERVICII = [
-  { value: "Mechanics", label: "Mecanică & Motor" },
-  { value: "Electrical", label: "Diagnoză & Electrică" },
-  { value: "Bodywork", label: "Caroserie & Detailing" },
-];
+import { TIPURI_SERVICII } from "../constants.js";
+import styles from "./TaskForm.module.css";
 
 const TITLU_MAX = 100;
 
@@ -28,6 +24,7 @@ export default function TaskForm({ onAdd }) {
       setEroare(mesaj);
       return;
     }
+
     setEroare("");
     setTrimite(true);
 
@@ -43,9 +40,9 @@ export default function TaskForm({ onAdd }) {
   }
 
   return (
-    <form className="emax-inline-form" onSubmit={handleSubmit} noValidate data-testid="form">
-      <div className="emax-form-row">
-        <label className="emax-form-group">
+    <form className={styles.form} onSubmit={handleSubmit} noValidate data-testid="form">
+      <div className={styles.row}>
+        <label className={styles.group}>
           <span>Intervenție auto</span>
           <input
             type="text"
@@ -58,7 +55,7 @@ export default function TaskForm({ onAdd }) {
           />
         </label>
 
-        <label className="emax-form-group">
+        <label className={styles.group}>
           <span>Departament</span>
           <select
             value={serviceType}
@@ -73,13 +70,13 @@ export default function TaskForm({ onAdd }) {
           </select>
         </label>
 
-        <button type="submit" disabled={trimite} data-testid="form-submit" className="btn-add-emax">
+        <button type="submit" disabled={trimite} data-testid="form-submit" className="btn">
           {trimite ? "Se salvează..." : "Deschide Fişă"}
         </button>
       </div>
 
       {eroare && (
-        <p className="error form-error-msg" data-testid="form-error">
+        <p className={`error ${styles.errorMsg}`} data-testid="form-error">
           {eroare}
         </p>
       )}

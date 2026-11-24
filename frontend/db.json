@@ -4,7 +4,7 @@
       "id": 1,
       "interventie": "Revizie motor B58 3.0L & Schimb ulei Ravenol — BMW M240i (G42)",
       "serviceType": "Mechanics",
-      "completed": true
+      "completed": false
     },
     {
       "id": 2,
@@ -41,6 +41,12 @@
       "interventie": "Polisare lac Multi-Stage & Protecție Ceramică 9H — BMW M340i",
       "serviceType": "Bodywork",
       "completed": false
+    },
+    {
+      "interventie": "Schimb de suspensii g42",
+      "serviceType": "Bodywork",
+      "completed": false,
+      "id": 8
     }
   ]
 }
