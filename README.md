@@ -31,6 +31,7 @@ npm run api
 - [x] Stage 5: local state and events
 - [x] Stage 6: data from a mock API
 - [x] Stage 7: form and validation
+- [x] Stage 8: routing and detail page
 
 ---
 
@@ -181,3 +182,28 @@ Interventions can be added directly from the page using a controlled form (`Task
 | S7-R6 | tw.json and the data-testid attributes from table 7.3 | https://github.com/Luca1212x5/autoservice-manager/blob/72c86f9215f48ba9890e165b9f51602d071dc89f/tw.json | querySelectorAll in the console |
 | S7-R7 | README Stage 7 section + AI log | https://github.com/Luca1212x5/autoservice-manager/blob/72c86f9215f48ba9890e165b9f51602d071dc89f/ai-log/etapa-07.md?plain=1 | read |
 | S7-R8 | commit "Stage 7" pushed | https://github.com/Luca1212x5/autoservice-manager/commit/72c86f9215f48ba9890e165b9f51602d071dc89f | commit history |
+
+---
+
+## Stage 8: routing and detail page
+
+**Description:**
+Three main pages behind React Router: the list and service catalog (`/`), a detail page at `/interventii/:id`, and an about/services showcase page (`/despre`), plus a 404 fallback page (`*`). Component styles moved to CSS Modules (`*.module.css`), leaving only shared variables and utility classes in `index.css`.
+
+**AI Usage:**
+- **Tool:** Gemini
+- **Used for:** Setting up React Router (`BrowserRouter`, `Layout` with `NavLink` and `Outlet`), migrating global CSS into component-scoped CSS Modules, implementing `fetchInterventie(id)` and the detail/404 pages, and adding Stage 8 `data-testid` attributes.
+- **AI Log:** See [`ai-log/etapa-08.md`](ai-log/etapa-08.md)
+
+### Stage 8 Checklist
+
+| ID | Requirement | Where (permalink) | How to check |
+| --- | --- | --- | --- |
+| S8-R1 | header navigation changes page without reload | https://github.com/Luca1212x5/autoservice-manager/blob/50c8210251bf404aaa330fc4db505b33b622ab50/frontend/src/components/Layout.jsx#L47-L54 | click links, watch Network |
+| S8-R2 | click on an item opens its detail page | https://github.com/Luca1212x5/autoservice-manager/blob/50c8210251bf404aaa330fc4db505b33b622ab50/frontend/src/components/InterventieCard.jsx#L19-L25 | click a title |
+| S8-R3 | refresh on the detail URL works; missing id shows an error | https://github.com/Luca1212x5/autoservice-manager/blob/50c8210251bf404aaa330fc4db505b33b622ab50/frontend/src/pages/InterventieDetaliuPage.jsx#L13-L55 | refresh /interventii/1, open /interventii/999 |
+| S8-R4 | unknown URL shows the app 404 page | https://github.com/Luca1212x5/autoservice-manager/blob/50c8210251bf404aaa330fc4db505b33b622ab50/frontend/src/App.jsx#L14 | open /ceva |
+| S8-R5 | each component has its .module.css; index.css only shared styles | https://github.com/Luca1212x5/autoservice-manager/tree/50c8210251bf404aaa330fc4db505b33b622ab50/frontend/src/components | read |
+| S8-R6 | data-testid attributes from tables 7.3 and 8.2; detail route /<resource>/:id | https://github.com/Luca1212x5/autoservice-manager/blob/50c8210251bf404aaa330fc4db505b33b622ab50/frontend/src/pages/InterventieDetaliuPage.jsx#L59-L65 | querySelector in the console |
+| S8-R7 | README Stage 8 section + AI log | https://github.com/Luca1212x5/autoservice-manager/blob/50c8210251bf404aaa330fc4db505b33b622ab50/ai-log/etapa-08.md?plain=1 | read |
+| S8-R8 | commit "Stage 8" pushed | https://github.com/Luca1212x5/autoservice-manager/commit/50c8210251bf404aaa330fc4db505b33b622ab50 | commit history |
